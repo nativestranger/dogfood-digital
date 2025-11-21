@@ -2,12 +2,23 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0a0a0a;
+  --ruby: #e0115f;
+  --ruby-dark: #b80d4a;
+  --ruby-light: #ff1a6b;
+  --ruby-glow: rgba(224, 17, 95, 0.3);
+  --muted: #6b7280;
+  --ruby-gradient: linear-gradient(135deg, #e0115f 0%, #ff1a6b 50%, #b80d4a 100%);
+  --ruby-gradient-subtle: linear-gradient(135deg, rgba(224, 17, 95, 0.1) 0%, rgba(255, 26, 107, 0.1) 50%, rgba(184, 13, 74, 0.1) 100%);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-ruby: var(--ruby);
+  --color-ruby-dark: var(--ruby-dark);
+  --color-ruby-light: var(--ruby-light);
+  --color-muted: var(--muted);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -15,12 +26,167 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: #fafafa;
+    --ruby: #ff1a6b;
+    --ruby-dark: #e0115f;
+    --ruby-light: #ff4d8a;
+    --ruby-glow: rgba(255, 26, 107, 0.4);
+    --muted: #9ca3af;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.scroll-smooth {
+  scroll-behavior: smooth;
+}
+
+.gradient-mask {
+  mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+}
+
+.hover-lift {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  .hover-lift:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Ruby gradient backgrounds */
+.ruby-gradient {
+  background: var(--ruby-gradient);
+}
+
+.ruby-gradient-subtle {
+  background: var(--ruby-gradient-subtle);
+}
+
+/* Geometric shapes */
+.geometric-splash {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.1;
+}
+
+.geometric-splash-1 {
+  width: 400px;
+  height: 400px;
+  background: var(--ruby-gradient);
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  top: -200px;
+  right: -200px;
+  filter: blur(60px);
+}
+
+.geometric-splash-2 {
+  width: 300px;
+  height: 300px;
+  background: var(--ruby-gradient);
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  bottom: -150px;
+  left: -150px;
+  filter: blur(50px);
+}
+
+.geometric-splash-3 {
+  width: 250px;
+  height: 250px;
+  background: var(--ruby-gradient);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  top: 50%;
+  left: 10%;
+  filter: blur(40px);
+}
+
+/* Ruby glow effect */
+.ruby-glow {
+  box-shadow: 0 0 30px var(--ruby-glow), 0 0 60px var(--ruby-glow);
+}
+
+.ruby-text-gradient {
+  background: var(--ruby-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Animated gradient background */
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animated-gradient {
+  background: linear-gradient(-45deg, #e0115f, #ff1a6b, #b80d4a, #e0115f);
+  background-size: 400% 400%;
+  animation: gradient-shift 15s ease infinite;
+}
+
+/* Parallax effect */
+.parallax-slow {
+  transition: transform 0.1s ease-out;
+}
+
+.parallax-fast {
+  transition: transform 0.2s ease-out;
 }
