@@ -24,21 +24,106 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
+  :root:not(.light) {
+    --background: #000000;
     --foreground: #fafafa;
     --ruby: #ff1a6b;
     --ruby-dark: #e0115f;
     --ruby-light: #ff4d8a;
-    --ruby-glow: rgba(255, 26, 107, 0.4);
+    --ruby-glow: rgba(255, 26, 107, 0.5);
     --muted: #9ca3af;
   }
+}
+
+.dark {
+  --background: #000000;
+  --foreground: #fafafa;
+  --ruby: #ff1a6b;
+  --ruby-dark: #e0115f;
+  --ruby-light: #ff4d8a;
+  --ruby-glow: rgba(255, 26, 107, 0.5);
+  --muted: #9ca3af;
+}
+
+.light {
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+  --ruby: #e0115f;
+  --ruby-dark: #b80d4a;
+  --ruby-light: #ff1a6b;
+  --ruby-glow: rgba(224, 17, 95, 0.3);
+  --muted: #6b7280;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+.dark,
+.dark body,
+.dark #__next,
+.dark main {
+  background: #000000 !important;
+}
+
+.dark section {
+  background-color: #000000 !important;
+}
+
+.dark div[class*="bg-gradient"],
+.dark div[class*="via-"] {
+  background: #000000;
+}
+
+/* Force all backgrounds to be black in dark mode */
+html.dark {
+  background-color: #000000;
+}
+
+html.dark * {
+  border-color: rgba(224, 17, 95, 0.2);
+}
+
+* {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Prevent horizontal overflow on all sections */
+section {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Ensure headings wrap properly on mobile */
+h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+  hyphens: manual;
+  text-wrap: balance;
+}
+
+/* Better text balance for hero headings */
+@supports (text-wrap: balance) {
+  h1 {
+    text-wrap: balance;
+  }
+}
+
+/* Prevent awkward word breaks in card titles and content */
+.no-break-words {
+  word-break: keep-all;
+  overflow-wrap: normal;
+  hyphens: none;
+}
+
+/* Better text wrapping for card content */
+p, span {
+  word-break: normal;
+  overflow-wrap: break-word;
+  hyphens: none;
 }
 
 @keyframes fadeInUp {
@@ -103,9 +188,13 @@ body {
 }
 
 @media (prefers-color-scheme: dark) {
-  .hover-lift:hover {
+  :root:not(.light) .hover-lift:hover {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   }
+}
+
+.dark .hover-lift:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 /* Ruby gradient backgrounds */
@@ -122,36 +211,70 @@ body {
   position: absolute;
   pointer-events: none;
   opacity: 0.1;
+  will-change: transform;
+}
+
+.dark .geometric-splash {
+  opacity: 0.2;
 }
 
 .geometric-splash-1 {
-  width: 400px;
-  height: 400px;
-  background: var(--ruby-gradient);
-  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-  top: -200px;
-  right: -200px;
-  filter: blur(60px);
-}
-
-.geometric-splash-2 {
-  width: 300px;
-  height: 300px;
-  background: var(--ruby-gradient);
-  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-  bottom: -150px;
-  left: -150px;
-  filter: blur(50px);
-}
-
-.geometric-splash-3 {
   width: 250px;
   height: 250px;
   background: var(--ruby-gradient);
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  top: -125px;
+  right: -125px;
+  filter: blur(40px);
+}
+
+@media (min-width: 768px) {
+  .geometric-splash-1 {
+    width: 400px;
+    height: 400px;
+    top: -200px;
+    right: -200px;
+    filter: blur(60px);
+  }
+}
+
+.geometric-splash-2 {
+  width: 200px;
+  height: 200px;
+  background: var(--ruby-gradient);
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  bottom: -100px;
+  left: -100px;
+  filter: blur(35px);
+}
+
+@media (min-width: 768px) {
+  .geometric-splash-2 {
+    width: 300px;
+    height: 300px;
+    bottom: -150px;
+    left: -150px;
+    filter: blur(50px);
+  }
+}
+
+.geometric-splash-3 {
+  width: 180px;
+  height: 180px;
+  background: var(--ruby-gradient);
   border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
   top: 50%;
-  left: 10%;
-  filter: blur(40px);
+  left: 5%;
+  filter: blur(30px);
+}
+
+@media (min-width: 768px) {
+  .geometric-splash-3 {
+    width: 250px;
+    height: 250px;
+    left: 10%;
+    filter: blur(40px);
+  }
 }
 
 /* Ruby glow effect */
@@ -185,8 +308,32 @@ body {
 /* Parallax effect */
 .parallax-slow {
   transition: transform 0.1s ease-out;
+  will-change: transform;
 }
 
 .parallax-fast {
   transition: transform 0.2s ease-out;
+  will-change: transform;
+}
+
+/* Smooth scroll reveal for FAQ items */
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Subtle pulse animation */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
 }

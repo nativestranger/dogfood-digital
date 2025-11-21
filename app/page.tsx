@@ -5,7 +5,40 @@ import { useEffect, useRef, useState } from "react";
 export default function Home() {
   const observerRef = useRef<IntersectionObserver | null>(null);
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
+  const [isDarkMode, setIsDarkMode] = useState(true); // Default to dark mode
   const parallaxRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    // Check if user has explicitly set light mode
+    const savedTheme = localStorage.getItem('theme');
+    
+    if (savedTheme === 'light') {
+      setIsDarkMode(false);
+      document.documentElement.classList.add('light');
+      document.documentElement.classList.remove('dark');
+    } else {
+      // Default to dark mode
+      setIsDarkMode(true);
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+      if (!savedTheme) {
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+    if (!isDarkMode) {
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+      localStorage.setItem('theme', 'light');
+    }
+  };
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
@@ -38,6 +71,8 @@ export default function Home() {
           else if (idx === 1) speed = 0.5;
           else if (idx === 2) speed = 0.2;
           else if (idx === 3) speed = 0.4; // How We Work parallax
+          else if (idx === 4) speed = 0.35; // FAQ parallax 1 - faster
+          else if (idx === 5) speed = 0.15; // FAQ parallax 2 - slower
           ref.style.transform = `translateY(${scrollY * speed}px)`;
         }
       });
@@ -123,44 +158,79 @@ export default function Home() {
   ];
 
   return (
-    <div className="scroll-smooth">
+    <div className="scroll-smooth dark:bg-black">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-foreground/5">
-        <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-          <div className="text-lg font-semibold">Dogfood Digital</div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-5 flex justify-between items-center">
+          <div className="text-base sm:text-lg font-semibold">Dogfood Digital</div>
           <div className="hidden md:flex items-center gap-8 text-sm">
             <a href="#how-we-work" className="text-foreground/60 hover:text-foreground transition-colors">How We Work</a>
             <a href="#pricing" className="text-foreground/60 hover:text-foreground transition-colors">Pricing</a>
             <a href="#faq" className="text-foreground/60 hover:text-foreground transition-colors">FAQ</a>
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg hover:bg-foreground/5 transition-all duration-300"
+              aria-label="Toggle theme"
+            >
+              {isDarkMode ? (
+                <svg className="w-5 h-5 text-foreground/60 hover:text-foreground transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              ) : (
+                <svg className="w-5 h-5 text-foreground/60 hover:text-foreground transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+              )}
+            </button>
             <a href="#contact" className="px-5 py-2.5 bg-[#e0115f] text-white rounded-lg hover:bg-[#b80d4a] transition-all duration-300 font-medium ruby-glow">Start a Project</a>
+          </div>
+          <div className="md:hidden flex items-center gap-3">
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg hover:bg-foreground/5 transition-all duration-300"
+              aria-label="Toggle theme"
+            >
+              {isDarkMode ? (
+                <svg className="w-5 h-5 text-foreground/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              ) : (
+                <svg className="w-5 h-5 text-foreground/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+              )}
+            </button>
+            <a href="#contact" className="px-4 py-2 bg-[#e0115f] text-white rounded-lg text-sm font-medium">Start</a>
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="min-h-screen flex flex-col items-center justify-center px-6 py-32 pt-32 relative overflow-hidden">
+      <section className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 py-32 pt-32 relative overflow-hidden dark:bg-black">
         <div ref={(el) => { parallaxRefs.current[0] = el; }} className="geometric-splash geometric-splash-1 parallax-slow"></div>
         <div ref={(el) => { parallaxRefs.current[1] = el; }} className="geometric-splash geometric-splash-2 parallax-fast"></div>
-        <div className="max-w-5xl mx-auto text-center space-y-12 fade-on-scroll opacity-0 relative z-10">
+        {/* Red atmospheric glow for dark mode */}
+        <div className="hidden dark:block absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#e0115f]/15 via-black to-black opacity-40 pointer-events-none"></div>
+        <div className="max-w-5xl mx-auto text-center space-y-8 sm:space-y-12 fade-on-scroll opacity-0 relative z-10 w-full">
           <div className="space-y-6">
-            <h1 className="text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight leading-[0.9]">
-              <span className="text-foreground">Built by the </span>
-              <span className="ruby-text-gradient">makers of RubyOnVibes</span>
-          </h1>
-            <p className="text-xl md:text-2xl lg:text-3xl text-foreground/60 max-w-3xl mx-auto leading-relaxed font-light">
+            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-tight leading-tight sm:leading-[0.95] px-2">
+              <span className="text-foreground block sm:inline">Built by the </span>
+              <span className="ruby-text-gradient block sm:inline">makers of RubyOnVibes</span>
+            </h1>
+            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-foreground/60 max-w-3xl mx-auto leading-relaxed font-light px-4">
               The in-house agency behind RubyOnVibes — building production-ready apps with the tools we build ourselves.
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4 px-4">
             <a
               href="#contact"
-              className="px-10 py-5 bg-[#e0115f] text-white font-medium rounded-xl hover:bg-[#b80d4a] transition-all duration-300 hover:scale-105 hover:shadow-2xl text-lg ruby-glow"
+              className="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 bg-[#e0115f] text-white font-medium rounded-xl hover:bg-[#b80d4a] transition-all duration-300 hover:scale-105 hover:shadow-2xl text-base sm:text-lg ruby-glow text-center"
             >
               Start a Project
             </a>
             <a
               href="#built-in-public"
-              className="px-10 py-5 border-2 border-[#e0115f]/30 text-[#e0115f] font-medium rounded-xl hover:bg-[#e0115f]/10 hover:border-[#e0115f]/50 transition-all duration-300 hover:scale-105 text-lg"
+              className="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 border-2 border-[#e0115f]/30 text-[#e0115f] font-medium rounded-xl hover:bg-[#e0115f]/10 hover:border-[#e0115f]/50 transition-all duration-300 hover:scale-105 text-base sm:text-lg text-center"
             >
               See How We Build in Public
             </a>
@@ -169,7 +239,7 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-24 px-6 border-y border-foreground/5 relative overflow-hidden">
+      <section className="py-16 sm:py-24 px-4 sm:px-6 border-y border-foreground/5 relative overflow-hidden dark:bg-black dark:border-[#e0115f]/20">
         <div ref={(el) => { parallaxRefs.current[2] = el; }} className="geometric-splash geometric-splash-3 parallax-slow"></div>
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
@@ -180,11 +250,11 @@ export default function Home() {
             ].map((stat, idx) => (
               <div
                 key={idx}
-                className="fade-on-scroll opacity-0 text-center"
+                className="fade-on-scroll opacity-0 text-center px-4"
                 style={{ animationDelay: `${idx * 0.1}s` }}
               >
-                <div className="text-5xl md:text-6xl font-bold mb-2 ruby-text-gradient">{stat.value}</div>
-                <div className="text-lg font-semibold mb-1">{stat.label}</div>
+                <div className="text-4xl sm:text-5xl md:text-6xl font-bold mb-2 ruby-text-gradient whitespace-nowrap">{stat.value}</div>
+                <div className="text-base sm:text-lg font-semibold mb-1 no-break-words">{stat.label}</div>
                 <div className="text-sm text-foreground/50">{stat.sublabel}</div>
               </div>
             ))}
@@ -193,13 +263,13 @@ export default function Home() {
       </section>
 
       {/* What Is Dogfood Digital */}
-      <section className="py-32 px-6">
+      <section className="py-20 sm:py-32 px-4 sm:px-6 dark:bg-black">
         <div className="max-w-4xl mx-auto fade-on-scroll opacity-0">
           <div className="space-y-6">
-            <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4">
               Dogfood Digital
             </h2>
-            <p className="text-xl md:text-2xl text-foreground/60 leading-relaxed font-light">
+            <p className="text-lg sm:text-xl md:text-2xl text-foreground/60 leading-relaxed font-light">
               We practice what we preach. Dogfood Digital builds real, production applications using RubyOnVibes, Rails, and React. As the in-house agency behind RubyOnVibes, we have deep expertise in the stack and ship faster because we know every edge case. The result? Better products, delivered faster.
             </p>
           </div>
@@ -207,17 +277,23 @@ export default function Home() {
       </section>
 
       {/* How We Work */}
-      <section id="how-we-work" className="py-32 px-6 relative overflow-hidden">
-        <div className="animated-gradient absolute inset-0 opacity-5"></div>
-        <div ref={(el) => { parallaxRefs.current[3] = el; }} className="geometric-splash geometric-splash-1 parallax-slow" style={{ top: "10%", right: "-10%" }}></div>
+      <section id="how-we-work" className="py-20 sm:py-32 px-4 sm:px-6 relative overflow-hidden bg-white dark:bg-black">
+        <div className="animated-gradient absolute inset-0 opacity-[0.03] dark:opacity-[0.2]"></div>
+        <div ref={(el) => { parallaxRefs.current[3] = el; }} className="geometric-splash geometric-splash-1 parallax-slow opacity-0 dark:opacity-[0.3]" style={{ top: "10%", right: "-10%" }}></div>
+        {/* Red atmospheric glows for dark mode only */}
+        <div className="hidden dark:block absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#e0115f]/25 via-black to-black opacity-70 pointer-events-none"></div>
+        <div className="hidden dark:block absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-[#e0115f]/15 via-transparent to-black opacity-50 pointer-events-none"></div>
         <div className="max-w-7xl mx-auto relative z-10">
-          <h2 className="text-5xl md:text-6xl font-bold mb-4 text-center tracking-tight fade-on-scroll opacity-0">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-center tracking-tight fade-on-scroll opacity-0">
             How We Work
           </h2>
-          <p className="text-xl text-foreground/60 text-center mb-20 fade-on-scroll opacity-0">
+          <p className="text-base sm:text-lg md:text-xl text-foreground/60 text-center mb-12 sm:mb-20 fade-on-scroll opacity-0 px-4 max-w-3xl mx-auto">
             We simplify complex builds into fast, focused sprints that ship real results every week.
           </p>
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 relative">
+            {/* Connecting line for desktop */}
+            <div className="hidden lg:block absolute top-12 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#e0115f]/20 dark:via-[#e0115f]/50 to-transparent pointer-events-none"></div>
+            
             {[
               {
                 step: "01",
@@ -246,13 +322,32 @@ export default function Home() {
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="fade-on-scroll opacity-0 hover-lift p-8 rounded-2xl border border-foreground/5 bg-background hover:border-[#e0115f]/20 transition-all duration-300"
+                className="fade-on-scroll opacity-0 hover-lift p-6 sm:p-7 lg:p-8 rounded-2xl bg-background dark:bg-black/80 hover:shadow-xl dark:hover:shadow-[#e0115f]/20 transition-all duration-500 group relative overflow-hidden border border-foreground/5 dark:border-[#e0115f]/20 hover:border-[#e0115f]/20 dark:hover:border-[#e0115f]/40"
                 style={{ animationDelay: `${idx * 0.1}s` }}
               >
-                <div className="text-sm font-mono text-[#e0115f] mb-4 font-semibold">{item.step}</div>
-                <h3 className="text-2xl font-bold mb-2">{item.title}</h3>
-                <div className="text-sm font-medium text-foreground/60 mb-4">{item.subtitle}</div>
-                <p className="text-foreground/60 leading-relaxed">{item.description}</p>
+                {/* Subtle gradient overlay on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[#e0115f]/0 via-[#e0115f]/0 to-[#e0115f]/[0.02] dark:from-[#e0115f]/[0.08] dark:via-[#e0115f]/[0.04] dark:to-[#e0115f]/[0.12] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                
+                {/* Subtle red glow in dark mode */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[#e0115f]/0 via-transparent to-[#e0115f]/0 dark:from-[#e0115f]/[0.05] dark:via-[#e0115f]/[0.02] dark:to-[#e0115f]/[0.08] pointer-events-none"></div>
+                
+                {/* Large number background */}
+                <div className="absolute -right-4 -top-2 text-[120px] font-bold text-foreground/[0.02] dark:text-[#e0115f]/[0.15] group-hover:text-[#e0115f]/[0.05] dark:group-hover:text-[#e0115f]/[0.25] transition-all duration-500 leading-none select-none">
+                  {item.step}
+                </div>
+                
+                <div className="relative z-10">
+                  <div className="flex items-center gap-3 mb-3 sm:mb-4">
+                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#e0115f]/10 to-[#e0115f]/5 dark:from-[#e0115f]/30 dark:to-[#e0115f]/20 flex items-center justify-center group-hover:from-[#e0115f]/20 group-hover:to-[#e0115f]/10 dark:group-hover:from-[#e0115f]/50 dark:group-hover:to-[#e0115f]/30 transition-all duration-300 shadow-sm dark:shadow-[#e0115f]/20">
+                      <span className="text-sm font-mono text-[#e0115f] dark:text-[#ff1a6b] font-bold">{item.step}</span>
+                    </div>
+                    <div className="h-px flex-1 bg-gradient-to-r from-[#e0115f]/20 via-[#e0115f]/10 to-transparent dark:from-[#e0115f]/40 dark:via-[#e0115f]/20"></div>
+                  </div>
+                  
+                  <h3 className="text-2xl font-bold mb-2 no-break-words group-hover:text-[#e0115f] dark:group-hover:text-[#ff1a6b] transition-colors duration-300">{item.title}</h3>
+                  <div className="text-sm font-medium text-[#e0115f]/80 dark:text-[#ff1a6b] mb-3 sm:mb-4">{item.subtitle}</div>
+                  <p className="text-sm sm:text-sm lg:text-base text-foreground/60 dark:text-foreground/80 leading-relaxed group-hover:text-foreground/70 dark:group-hover:text-foreground/90 transition-colors duration-300">{item.description}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -260,87 +355,91 @@ export default function Home() {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-32 px-6 bg-background">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-5xl md:text-6xl font-bold mb-4 text-center tracking-tight fade-on-scroll opacity-0">
+      <section id="pricing" className="py-20 sm:py-32 px-4 sm:px-6 bg-background dark:bg-black relative overflow-hidden">
+        {/* Subtle red glow for dark mode */}
+        <div className="hidden dark:block absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-[#e0115f]/10 via-transparent to-black opacity-50 pointer-events-none"></div>
+        <div className="max-w-7xl mx-auto relative z-10">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-center tracking-tight fade-on-scroll opacity-0">
             Pricing
           </h2>
-          <p className="text-xl text-foreground/60 text-center mb-20 fade-on-scroll opacity-0">
+          <p className="text-base sm:text-lg md:text-xl text-foreground/60 text-center mb-12 sm:mb-20 fade-on-scroll opacity-0 px-4">
             Your own fractionalized team, with flexible pricing. No contract term.
           </p>
-          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {/* Strategy Session */}
-            <div className="fade-on-scroll opacity-0 hover-lift p-8 rounded-2xl border-2 border-foreground/10 bg-background">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-lg border-2 border-foreground/20 flex items-center justify-center">
-                  <svg className="w-5 h-5 text-foreground/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="fade-on-scroll opacity-0 hover-lift p-6 sm:p-8 lg:p-10 rounded-2xl border-2 border-foreground/10 dark:border-[#e0115f]/20 bg-background dark:bg-black">
+              <div className="flex items-center gap-3 sm:gap-4 mb-6">
+                <div className="w-12 h-12 rounded-lg border-2 border-[#e0115f]/20 flex items-center justify-center flex-shrink-0">
+                  <svg className="w-6 h-6 text-[#e0115f]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold">Strategy Session</h3>
-                  <p className="text-xs text-foreground/50">1-hour consultation</p>
+                  <h3 className="text-xl sm:text-2xl font-bold no-break-words whitespace-nowrap">Strategy Session</h3>
+                  <p className="text-xs sm:text-sm text-foreground/60">1-hour consultation</p>
                 </div>
               </div>
-              <p className="text-sm text-foreground/60 mb-4 leading-relaxed">
+              <p className="text-foreground/70 mb-6 leading-relaxed">
                 Not sure where to start? Let's talk through your idea, stack choices, and roadmap.
               </p>
-              <div className="mb-4">
-                <div className="text-3xl font-bold text-foreground mb-1">$500</div>
-                <div className="text-xs text-foreground/50">/ One-time</div>
-              </div>
-              <div className="mb-4 p-3 bg-[#e0115f]/10 border border-[#e0115f]/20 rounded-lg">
-                <p className="text-xs text-[#e0115f] font-medium">
-                  ✓ Credit applies to MVP or Growth plans if you hire us
-                </p>
+              <div className="mb-6">
+                <div className="text-4xl sm:text-5xl font-bold ruby-text-gradient mb-1 whitespace-nowrap">$500</div>
+                <div className="text-sm text-foreground/60 whitespace-nowrap">/ One-time</div>
+                <div className="text-sm text-foreground/50 mt-2">Perfect for early validation</div>
               </div>
               <a
                 href="#contact"
-                className="block w-full px-4 py-2.5 border-2 border-foreground/20 text-foreground font-medium rounded-lg hover:bg-foreground/5 transition-all duration-300 text-center mb-4 text-sm"
+                className="block w-full px-6 py-3 border-2 border-[#e0115f]/30 text-[#e0115f] font-medium rounded-lg hover:bg-[#e0115f]/10 hover:border-[#e0115f]/50 transition-all duration-300 text-center mb-6"
               >
                 Book a Call
               </a>
-              <div className="space-y-2 text-xs">
-                <div className="flex items-start gap-2">
-                  <svg className="w-4 h-4 text-[#e0115f] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <div className="space-y-3 text-sm">
+                <div className="flex items-start gap-3">
+                  <svg className="w-5 h-5 text-[#e0115f] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-foreground/60">Technical roadmap</span>
+                  <span className="text-foreground/70">Technical roadmap</span>
                 </div>
-                <div className="flex items-start gap-2">
-                  <svg className="w-4 h-4 text-[#e0115f] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <div className="flex items-start gap-3">
+                  <svg className="w-5 h-5 text-[#e0115f] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-foreground/60">Stack recommendations</span>
+                  <span className="text-foreground/70">Stack recommendations</span>
                 </div>
-                <div className="flex items-start gap-2">
-                  <svg className="w-4 h-4 text-[#e0115f] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <div className="flex items-start gap-3">
+                  <svg className="w-5 h-5 text-[#e0115f] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-foreground/60">MVP scope & timeline</span>
+                  <span className="text-foreground/70">MVP scope & timeline</span>
+                </div>
+                <div className="flex items-start gap-3 pt-2 border-t border-foreground/5">
+                  <svg className="w-5 h-5 text-[#e0115f] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-[#e0115f] font-medium text-sm">Credit applies if you hire us</span>
                 </div>
               </div>
             </div>
 
             {/* MVP Build */}
-            <div className="fade-on-scroll opacity-0 hover-lift p-10 rounded-2xl border-2 border-foreground/10 bg-background">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 rounded-lg ruby-gradient flex items-center justify-center">
+            <div className="fade-on-scroll opacity-0 hover-lift p-6 sm:p-8 lg:p-10 rounded-2xl border-2 border-[#e0115f]/20 bg-background dark:bg-black">
+              <div className="flex items-center gap-3 sm:gap-4 mb-6">
+                <div className="w-12 h-12 rounded-lg ruby-gradient flex items-center justify-center flex-shrink-0 shadow-lg shadow-[#e0115f]/20">
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold">MVP Build</h3>
-                  <p className="text-sm text-foreground/60">We deliver an MVP in 2-4 weeks</p>
+                  <h3 className="text-xl sm:text-2xl font-bold no-break-words whitespace-nowrap">MVP Build</h3>
+                  <p className="text-xs sm:text-sm text-foreground/60">We deliver an MVP in 2-4 weeks</p>
                 </div>
               </div>
               <p className="text-foreground/70 mb-6 leading-relaxed">
                 Perfect for validating your idea fast. Get a full working product ready to launch.
               </p>
               <div className="mb-6">
-                <div className="text-5xl font-bold ruby-text-gradient mb-1">$1,000</div>
-                <div className="text-sm text-foreground/60">/ One-time</div>
+                <div className="text-4xl sm:text-5xl font-bold ruby-text-gradient mb-1 whitespace-nowrap">$1,000</div>
+                <div className="text-sm text-foreground/60 whitespace-nowrap">/ One-time</div>
                 <div className="text-sm text-foreground/50 mt-2">Starting price for MVPs</div>
               </div>
               <a
@@ -390,31 +489,31 @@ export default function Home() {
             </div>
 
             {/* Growth Build */}
-            <div className="fade-on-scroll opacity-0 hover-lift p-10 rounded-2xl border-2 border-[#e0115f]/20 bg-background relative overflow-hidden">
-              <div className="ruby-gradient-subtle absolute inset-0 opacity-5"></div>
+            <div className="fade-on-scroll opacity-0 hover-lift p-6 sm:p-8 lg:p-10 rounded-2xl border-2 border-[#e0115f]/30 bg-background dark:bg-black relative overflow-hidden shadow-lg shadow-[#e0115f]/5 dark:shadow-[#e0115f]/20">
+              <div className="ruby-gradient-subtle absolute inset-0 opacity-5 dark:opacity-20"></div>
               <div className="relative z-10">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 rounded-lg border-2 border-[#e0115f]/30 flex items-center justify-center">
-                    <svg className="w-6 h-6 text-[#e0115f]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="flex items-center gap-3 sm:gap-4 mb-6">
+                  <div className="w-12 h-12 rounded-lg ruby-gradient flex items-center justify-center flex-shrink-0 shadow-xl shadow-[#e0115f]/30 ring-2 ring-[#e0115f]/10 ring-offset-2 dark:ring-offset-black">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                     </svg>
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold">Growth Build</h3>
-                    <p className="text-sm text-foreground/60">Bi-weekly sprints for scaling</p>
+                    <h3 className="text-xl sm:text-2xl font-bold no-break-words whitespace-nowrap">Growth Build</h3>
+                    <p className="text-xs sm:text-sm text-foreground/60">Bi-weekly sprints for scaling</p>
                   </div>
                 </div>
                 <p className="text-foreground/70 mb-6 leading-relaxed">
                   Scale your product with proven patterns. Continuous improvement through focused sprints.
                 </p>
                 <div className="mb-6">
-                  <div className="text-5xl font-bold mb-1 ruby-text-gradient">$2,500</div>
-                  <div className="text-sm text-foreground/60">/ Every 2 weeks</div>
+                  <div className="text-4xl sm:text-5xl font-bold mb-1 ruby-text-gradient whitespace-nowrap">$2,500</div>
+                  <div className="text-sm text-foreground/60 whitespace-nowrap">/ Every 2 weeks</div>
                   <div className="text-sm text-foreground/50 mt-2">Pause or cancel anytime</div>
                 </div>
                 <a
                   href="#contact"
-                  className="block w-full px-6 py-3 border-2 border-[#e0115f]/30 text-[#e0115f] font-medium rounded-lg hover:bg-[#e0115f]/10 hover:border-[#e0115f]/50 transition-all duration-300 text-center mb-6"
+                  className="block w-full px-6 py-3 bg-[#e0115f] text-white font-medium rounded-lg hover:bg-[#b80d4a] transition-all duration-300 text-center mb-6 ruby-glow shadow-lg shadow-[#e0115f]/20"
                 >
                   Book a Call
                 </a>
@@ -463,15 +562,15 @@ export default function Home() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-32 px-6 bg-background">
+      <section className="py-20 sm:py-32 px-4 sm:px-6 bg-background dark:bg-black">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-5xl md:text-6xl font-bold mb-4 text-center tracking-tight fade-on-scroll opacity-0">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-center tracking-tight fade-on-scroll opacity-0">
             Why Choose <span className="ruby-text-gradient">Dogfood Digital</span>
           </h2>
-          <p className="text-xl text-foreground/60 text-center mb-20 fade-on-scroll opacity-0">
+          <p className="text-base sm:text-lg md:text-xl text-foreground/60 text-center mb-12 sm:mb-20 fade-on-scroll opacity-0 px-4">
             We build polished, production-ready products that AI native.
           </p>
-          <div className="grid md:grid-cols-3 gap-12">
+          <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12">
             {[
               {
                 title: "Speed without compromise",
@@ -488,16 +587,16 @@ export default function Home() {
             ].map((feature, idx) => (
               <div
                 key={idx}
-                className="fade-on-scroll opacity-0 hover-lift p-10 rounded-2xl border border-foreground/5 hover:border-[#e0115f]/30 transition-all duration-300"
+                className="fade-on-scroll opacity-0 hover-lift p-6 sm:p-8 lg:p-10 rounded-2xl border border-foreground/5 dark:border-[#e0115f]/20 hover:border-[#e0115f]/30 dark:hover:border-[#e0115f]/40 transition-all duration-300 bg-background dark:bg-black/80"
                 style={{ animationDelay: `${idx * 0.1}s` }}
               >
-                <h3 className="text-3xl font-bold mb-4">{feature.title}</h3>
-                <p className="text-lg text-foreground/60 leading-relaxed">{feature.description}</p>
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-4 no-break-words">{feature.title}</h3>
+                <p className="text-base sm:text-lg text-foreground/60 dark:text-foreground/80 leading-relaxed">{feature.description}</p>
               </div>
             ))}
           </div>
-          <div className="mt-16 text-center fade-on-scroll opacity-0">
-            <p className="text-lg text-foreground/60 max-w-2xl mx-auto">
+          <div className="mt-12 sm:mt-16 text-center fade-on-scroll opacity-0">
+            <p className="text-base sm:text-lg text-foreground/60 max-w-2xl mx-auto px-4">
               As the in-house agency behind <span className="font-semibold text-[#e0115f]">RubyOnVibes</span>, we have deep expertise in the stack and a direct line to the framework team. Every project we ship makes the tools better for everyone.
             </p>
           </div>
@@ -505,14 +604,19 @@ export default function Home() {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-32 px-6 bg-background">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-5xl md:text-6xl font-bold mb-20 text-center tracking-tight fade-on-scroll opacity-0">
+      <section id="faq" className="py-20 sm:py-32 px-4 sm:px-6 bg-background dark:bg-black relative overflow-hidden">
+        <div className="animated-gradient absolute inset-0 opacity-[0.02] dark:opacity-[0.12]"></div>
+        <div ref={(el) => { parallaxRefs.current[4] = el; }} className="geometric-splash geometric-splash-2 parallax-fast" style={{ top: '10%', right: '-5%', opacity: '0.08' }}></div>
+        <div ref={(el) => { parallaxRefs.current[5] = el; }} className="geometric-splash geometric-splash-3 parallax-slow" style={{ bottom: '20%', left: '-5%', opacity: '0.06' }}></div>
+        {/* Subtle red ambient glow for dark mode */}
+        <div className="hidden dark:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#e0115f]/5 rounded-full blur-[120px] pointer-events-none"></div>
+        <div className="max-w-4xl mx-auto relative z-10">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-12 sm:mb-20 text-center tracking-tight fade-on-scroll opacity-0">
             FAQs
           </h2>
           <div className="space-y-6">
             {faqs.map((category, catIdx) => (
-              <div key={catIdx} className="fade-on-scroll opacity-0" style={{ animationDelay: `${catIdx * 0.1}s` }}>
+              <div key={catIdx} className="fade-on-scroll opacity-0 transition-transform duration-700 ease-out" style={{ animationDelay: `${catIdx * 0.15}s` }}>
                 <h3 className="text-sm font-semibold text-foreground/40 mb-4 uppercase tracking-wider">
                   {category.category}
                 </h3>
@@ -523,7 +627,7 @@ export default function Home() {
                     return (
                       <div
                         key={faqIdx}
-                        className={`border border-foreground/10 rounded-xl bg-background hover:border-foreground/20 transition-all duration-300 ${isOpen ? "border-[#e0115f]/30" : ""}`}
+                        className={`border border-foreground/10 dark:border-[#e0115f]/15 rounded-xl bg-background dark:bg-black/80 hover:border-foreground/20 dark:hover:border-[#e0115f]/30 hover:shadow-lg dark:hover:shadow-[#e0115f]/10 transition-all duration-300 hover:-translate-y-1 ${isOpen ? "border-[#e0115f]/30 dark:border-[#e0115f]/50 shadow-lg dark:shadow-[#e0115f]/20 translate-y-0" : ""}`}
                       >
                         <button
                           onClick={() => setOpenFAQ(isOpen ? null : index)}
@@ -531,7 +635,7 @@ export default function Home() {
                         >
                           <span className="text-lg font-semibold pr-8">{faq.q}</span>
                           <svg
-                            className={`w-5 h-5 text-foreground/40 flex-shrink-0 transition-transform ${isOpen ? "rotate-45" : ""}`}
+                            className={`w-5 h-5 text-foreground/40 flex-shrink-0 transition-transform duration-300 ${isOpen ? "rotate-45 text-[#e0115f]" : ""}`}
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -540,7 +644,7 @@ export default function Home() {
                           </svg>
                         </button>
                         {isOpen && (
-                          <div className="px-6 pb-5 pt-0">
+                          <div className="px-6 pb-5 pt-0 animate-fade-in">
                             <p className="text-foreground/70 leading-relaxed">{faq.a}</p>
                           </div>
                         )}
@@ -555,17 +659,26 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section id="contact" className="py-32 px-6 relative overflow-hidden" style={{ backgroundColor: '#0a0a0a' }}>
+      <section id="contact" className="py-20 sm:py-32 px-4 sm:px-6 relative overflow-hidden bg-white dark:bg-black">
+        <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.2]">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `radial-gradient(circle at 2px 2px, #e0115f 1px, transparent 0)`,
+            backgroundSize: '40px 40px'
+          }}></div>
+        </div>
+        {/* Strong red glow for dark mode */}
+        <div className="hidden dark:block absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#e0115f]/30 via-[#e0115f]/10 to-black opacity-80 pointer-events-none"></div>
         <div className="max-w-4xl mx-auto text-center fade-on-scroll opacity-0 relative z-10">
-          <h2 className="text-5xl md:text-6xl font-bold mb-8 tracking-tight text-white" style={{ "borderBottom": "0.04em solid #e0115f"}}>
-            Start your project with us today
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 sm:mb-8 tracking-tight px-4">
+            <span className="ruby-text-gradient">Start your project</span>
+            <span className="text-foreground"> with us today</span>
           </h2>
-          <p className="text-xl text-background/70 mb-12 font-light">
+          <p className="text-base sm:text-lg md:text-xl text-foreground/60 mb-8 sm:mb-12 font-light px-4">
             Ready to build something great? Let's talk about your project.
           </p>
           <a
             href="mailto:hello@dogfood.digital"
-            className="inline-block px-10 py-5 bg-[#e0115f] text-white font-medium rounded-xl hover:bg-[#b80d4a] transition-all duration-300 hover:scale-105 hover:shadow-2xl text-lg ruby-glow"
+            className="inline-block px-8 sm:px-10 py-4 sm:py-5 bg-[#e0115f] text-white font-medium rounded-xl hover:bg-[#b80d4a] transition-all duration-300 hover:scale-105 hover:shadow-2xl text-base sm:text-lg ruby-glow"
           >
             Start a Project
           </a>
@@ -573,11 +686,11 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-16 px-6 bg-background border-t border-foreground/5">
+      <footer className="py-12 sm:py-16 px-4 sm:px-6 bg-background dark:bg-black border-t border-foreground/5 dark:border-[#e0115f]/20">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-8 pb-8 border-b border-foreground/5">
-            <div className="text-xl font-semibold">Dogfood Digital</div>
-            <div className="flex gap-8 text-sm">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6 sm:gap-8 pb-6 sm:pb-8 border-b border-foreground/5">
+            <div className="text-lg sm:text-xl font-semibold">Dogfood Digital</div>
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-8 text-sm">
               <a
                 href="#how-we-work"
                 className="text-foreground/60 hover:text-[#e0115f] transition-colors"
@@ -604,7 +717,7 @@ export default function Home() {
               </a>
             </div>
           </div>
-          <div className="pt-8 text-center">
+          <div className="pt-6 sm:pt-8 text-center">
             <p className="text-sm text-foreground/40">
               Always shipping. Always dogfooding.
             </p>
