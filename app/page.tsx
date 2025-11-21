@@ -508,7 +508,7 @@ export default function Home() {
       <section id="faq" className="py-32 px-6 bg-background">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-5xl md:text-6xl font-bold mb-20 text-center tracking-tight fade-on-scroll opacity-0">
-            Questions? <span className="ruby-text-gradient">Answers.</span>
+            FAQs
           </h2>
           <div className="space-y-6">
             {faqs.map((category, catIdx) => (
@@ -557,8 +557,8 @@ export default function Home() {
       {/* CTA Section */}
       <section id="contact" className="py-32 px-6 relative overflow-hidden" style={{ backgroundColor: '#0a0a0a' }}>
         <div className="max-w-4xl mx-auto text-center fade-on-scroll opacity-0 relative z-10">
-          <h2 className="text-5xl md:text-6xl font-bold mb-8 tracking-tight text-background/90">
-            Start your project with us <span className="text-[#e0115f]">today</span>
+          <h2 className="text-5xl md:text-6xl font-bold mb-8 tracking-tight text-white" style={{ "borderBottom": "0.04em solid #e0115f"}}>
+            Start your project with us today
           </h2>
           <p className="text-xl text-background/70 mb-12 font-light">
             Ready to build something great? Let's talk about your project.
