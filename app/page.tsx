@@ -7,27 +7,26 @@ import Link from "next/link";
 export default function Home() {
   const observerRef = useRef<IntersectionObserver | null>(null);
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
-  const [isDarkMode, setIsDarkMode] = useState(true); // Default to dark mode
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    // Initialize from localStorage if available (prevents flash)
+    if (typeof window !== 'undefined') {
+      const savedTheme = localStorage.getItem('theme');
+      return savedTheme !== 'light';
+    }
+    return true; // Default to dark mode
+  });
   const parallaxRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    // Check if user has explicitly set light mode
-    const savedTheme = localStorage.getItem('theme');
-    
-    if (savedTheme === 'light') {
-      setIsDarkMode(false);
-      document.documentElement.classList.add('light');
-      document.documentElement.classList.remove('dark');
-    } else {
-      // Default to dark mode
-      setIsDarkMode(true);
+    // Sync document classes with state on mount
+    if (isDarkMode) {
       document.documentElement.classList.add('dark');
       document.documentElement.classList.remove('light');
-      if (!savedTheme) {
-        localStorage.setItem('theme', 'dark');
-      }
+    } else {
+      document.documentElement.classList.add('light');
+      document.documentElement.classList.remove('dark');
     }
-  }, []);
+  }, [isDarkMode]);
 
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);

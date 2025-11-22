@@ -23,18 +23,6 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not(.light) {
-    --background: #000000;
-    --foreground: #fafafa;
-    --ruby: #ff1a6b;
-    --ruby-dark: #e0115f;
-    --ruby-light: #ff4d8a;
-    --ruby-glow: rgba(255, 26, 107, 0.5);
-    --muted: #9ca3af;
-  }
-}
-
 .dark {
   --background: #000000;
   --foreground: #fafafa;
@@ -46,13 +34,13 @@
 }
 
 .light {
-  --background: #ffffff;
-  --foreground: #0a0a0a;
-  --ruby: #e0115f;
-  --ruby-dark: #b80d4a;
-  --ruby-light: #ff1a6b;
-  --ruby-glow: rgba(224, 17, 95, 0.3);
-  --muted: #6b7280;
+  --background: #ffffff !important;
+  --foreground: #0a0a0a !important;
+  --ruby: #e0115f !important;
+  --ruby-dark: #b80d4a !important;
+  --ruby-light: #ff1a6b !important;
+  --ruby-glow: rgba(224, 17, 95, 0.3) !important;
+  --muted: #6b7280 !important;
 }
 
 body {
