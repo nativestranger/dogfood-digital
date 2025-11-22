@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import ParallaxCard from "./components/ParallaxCard";
+import Link from "next/link";
 
 export default function Home() {
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -183,7 +184,13 @@ export default function Home() {
                 </svg>
               )}
             </button>
-            <a href="#contact" className="px-5 py-2.5 bg-[#e0115f] text-white rounded-lg hover:bg-[#b80d4a] transition-all duration-300 font-medium ruby-glow">Start a Project</a>
+            <Link
+              href="/apply"
+              className="px-5 py-2.5 bg-[#e0115f] text-white rounded-lg hover:bg-[#b80d4a] transition-all duration-300 font-medium ruby-glow"
+            >
+              Book a Call
+            </Link>
+            <a href="#contact" className="px-5 py-2.5 border-2 border-[#e0115f]/30 text-[#e0115f] rounded-lg hover:bg-[#e0115f]/10 transition-all duration-300 font-medium">Start a Project</a>
           </div>
           <div className="md:hidden flex items-center gap-3">
             <button
@@ -201,13 +208,18 @@ export default function Home() {
                 </svg>
               )}
             </button>
-            <a href="#contact" className="px-4 py-2 bg-[#e0115f] text-white rounded-lg text-sm font-medium">Start</a>
+            <Link
+              href="/apply"
+              className="px-4 py-2 bg-[#e0115f] text-white rounded-lg text-sm font-medium"
+            >
+              Book Call
+            </Link>
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 py-32 pt-32 relative overflow-hidden dark:bg-black">
+      <section className="min-h-screen flex flex-col items-center justify-center px-6 sm:px-8 py-32 pt-32 relative overflow-hidden dark:bg-black">
         <div ref={(el) => { parallaxRefs.current[0] = el; }} className="geometric-splash geometric-splash-1 parallax-slow"></div>
         <div ref={(el) => { parallaxRefs.current[1] = el; }} className="geometric-splash geometric-splash-2 parallax-fast"></div>
         {/* Red spot glows - light mode */}
@@ -280,13 +292,13 @@ export default function Home() {
       </section>
 
       {/* What Is Dogfood Digital */}
-      <section className="py-20 sm:py-32 px-4 sm:px-6 dark:bg-black relative overflow-hidden">
+      <section className="py-20 sm:py-32 px-6 sm:px-8 dark:bg-black relative overflow-hidden">
         {/* Red spot glows - light mode */}
         <div className="dark:hidden absolute top-1/3 right-1/4 w-[350px] h-[350px] bg-[#e0115f]/14 rounded-full blur-[95px] pointer-events-none"></div>
         {/* Red spot glows - dark mode */}
         <div className="hidden dark:block absolute top-1/3 right-1/4 w-[350px] h-[350px] bg-[#e0115f]/22 rounded-full blur-[95px] pointer-events-none"></div>
         <div className="max-w-4xl mx-auto fade-on-scroll opacity-0 relative z-10">
-          <div className="space-y-6">
+          <div className="space-y-6 px-2">
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4">
               Dogfood Digital
             </h2>
@@ -298,7 +310,7 @@ export default function Home() {
       </section>
 
       {/* How We Work */}
-      <section id="how-we-work" className="py-20 sm:py-32 px-4 sm:px-6 relative overflow-hidden bg-white dark:bg-black">
+      <section id="how-we-work" className="py-20 sm:py-32 px-6 sm:px-8 relative overflow-hidden bg-white dark:bg-black">
         <div className="animated-gradient absolute inset-0 opacity-[0.03] dark:opacity-[0.2]"></div>
         <div ref={(el) => { parallaxRefs.current[3] = el; }} className="geometric-splash geometric-splash-1 parallax-slow opacity-0 dark:opacity-[0.3]" style={{ top: "10%", right: "-10%" }}></div>
         {/* Red spot glows - light mode */}
@@ -372,7 +384,7 @@ export default function Home() {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-20 sm:py-32 px-4 sm:px-6 bg-background dark:bg-black relative overflow-hidden">
+      <section id="pricing" className="py-20 sm:py-32 px-6 sm:px-8 bg-background dark:bg-black relative overflow-hidden">
         {/* Red spot glows - light mode */}
         <div className="dark:hidden absolute top-1/3 left-1/4 w-[450px] h-[450px] bg-[#e0115f]/18 rounded-full blur-[110px] pointer-events-none"></div>
         <div className="dark:hidden absolute bottom-1/4 right-1/3 w-[400px] h-[400px] bg-[#e0115f]/15 rounded-full blur-[100px] pointer-events-none"></div>
@@ -413,12 +425,12 @@ export default function Home() {
                 <div className="text-sm text-foreground/60 whitespace-nowrap">/ One-time</div>
                 <div className="text-sm text-foreground/50 mt-2">Perfect for early validation</div>
               </div>
-              <a
-                href="#contact"
+              <Link
+                href="/apply"
                 className="block w-full px-6 py-3 bg-[#e0115f] text-white font-medium rounded-lg hover:bg-[#b80d4a] transition-all duration-300 text-center mb-6 ruby-glow"
               >
                 Book a Call
-              </a>
+              </Link>
               <div className="space-y-3 text-sm">
                 <div className="flex items-start gap-3">
                   <svg className="w-5 h-5 text-[#e0115f] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -547,12 +559,12 @@ export default function Home() {
                   <div className="text-sm text-foreground/60 whitespace-nowrap">/ Every 2 weeks</div>
                   <div className="text-sm text-foreground/50 mt-2">Pause or cancel anytime</div>
                 </div>
-                <a
-                  href="#contact"
+                <Link
+                  href="/apply"
                   className="block w-full px-6 py-3 bg-[#e0115f] text-white font-medium rounded-lg hover:bg-[#b80d4a] transition-all duration-300 text-center mb-6 ruby-glow shadow-lg shadow-[#e0115f]/20"
                 >
                   Book a Call
-                </a>
+                </Link>
                 <div className="space-y-3 text-sm">
                   <div className="flex items-start gap-3">
                     <svg className="w-5 h-5 text-[#e0115f] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -598,7 +610,7 @@ export default function Home() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-20 sm:py-32 px-4 sm:px-6 bg-background dark:bg-black relative overflow-hidden">
+      <section className="py-20 sm:py-32 px-6 sm:px-8 bg-background dark:bg-black relative overflow-hidden">
         {/* Red spot glows - light mode */}
         <div className="dark:hidden absolute top-1/4 left-1/3 w-[420px] h-[420px] bg-[#e0115f]/16 rounded-full blur-[105px] pointer-events-none"></div>
         {/* Red spot glows - dark mode */}
@@ -646,7 +658,7 @@ export default function Home() {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-20 sm:py-32 px-4 sm:px-6 bg-background dark:bg-black relative overflow-hidden">
+      <section id="faq" className="py-20 sm:py-32 px-6 sm:px-8 bg-background dark:bg-black relative overflow-hidden">
         <div className="animated-gradient absolute inset-0 opacity-[0.02] dark:opacity-[0.12]"></div>
         <div ref={(el) => { parallaxRefs.current[4] = el; }} className="geometric-splash geometric-splash-2 parallax-fast" style={{ top: '10%', right: '-5%', opacity: '0.08' }}></div>
         <div ref={(el) => { parallaxRefs.current[5] = el; }} className="geometric-splash geometric-splash-3 parallax-slow" style={{ bottom: '20%', left: '-5%', opacity: '0.06' }}></div>
@@ -705,7 +717,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section id="contact" className="py-20 sm:py-32 px-4 sm:px-6 relative overflow-hidden bg-white dark:bg-black">
+      <section id="contact" className="py-20 sm:py-32 px-6 sm:px-8 relative overflow-hidden bg-white dark:bg-black">
         <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.2]">
           <div className="absolute inset-0" style={{
             backgroundImage: `radial-gradient(circle at 2px 2px, #e0115f 1px, transparent 0)`,

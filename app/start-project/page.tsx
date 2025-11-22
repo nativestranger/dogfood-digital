@@ -62,6 +62,12 @@ export default function StartProject() {
                 </svg>
               )}
             </button>
+            <Link
+              href="/apply"
+              className="px-4 py-2 bg-[#e0115f] text-white rounded-lg hover:bg-[#b80d4a] transition-all duration-300 text-sm font-medium ruby-glow"
+            >
+              Book a Call
+            </Link>
             <Link href="/" className="text-sm text-foreground/60 hover:text-foreground transition-colors">
               Back to Home
             </Link>
