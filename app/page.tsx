@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import ParallaxCard from "./components/ParallaxCard";
 
 export default function Home() {
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -262,15 +263,17 @@ export default function Home() {
               { value: "0-4", label: "Weeks to MVP", sublabel: "Fast iteration, real results" },
               { value: "∞", label: "Continuous Improvement", sublabel: "Every build makes the stack better" },
             ].map((stat, idx) => (
-              <div
+              <ParallaxCard
                 key={idx}
-                className="fade-on-scroll opacity-0 text-center px-4"
-                style={{ animationDelay: `${idx * 0.1}s` }}
+                delay={idx * 0.1}
+                parallaxStrength={10}
+                hoverLift={3}
+                className="text-center px-4"
               >
                 <div className="text-4xl sm:text-5xl md:text-6xl font-bold mb-2 ruby-text-gradient whitespace-nowrap">{stat.value}</div>
                 <div className="text-base sm:text-lg font-semibold mb-1 no-break-words">{stat.label}</div>
                 <div className="text-sm text-foreground/50">{stat.sublabel}</div>
-              </div>
+              </ParallaxCard>
             ))}
           </div>
         </div>
@@ -338,10 +341,11 @@ export default function Home() {
                 description: "Join weekly calls, stay connected asynchronously, and pause or cancel anytime — total flexibility, zero long-term commitments.",
               },
             ].map((item, idx) => (
-              <div
+              <ParallaxCard
                 key={idx}
-                className="fade-on-scroll opacity-0 hover-lift p-6 sm:p-7 lg:p-8 rounded-2xl bg-background dark:bg-black/80 hover:shadow-xl dark:hover:shadow-[#e0115f]/20 transition-all duration-500 group relative overflow-hidden border border-foreground/5 dark:border-[#e0115f]/20 hover:border-[#e0115f]/20 dark:hover:border-[#e0115f]/40"
-                style={{ animationDelay: `${idx * 0.1}s` }}
+                delay={idx * 0.08}
+                parallaxStrength={15}
+                className="p-6 sm:p-7 lg:p-8 rounded-2xl bg-background dark:bg-black/80 shadow-lg dark:shadow-[#e0115f]/10 hover:shadow-xl dark:hover:shadow-[#e0115f]/20 transition-shadow duration-500 group relative overflow-hidden border border-foreground/5 dark:border-[#e0115f]/20 hover:border-[#e0115f]/20 dark:hover:border-[#e0115f]/40"
               >
                 {/* Subtle gradient overlay on hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-[#e0115f]/0 via-[#e0115f]/0 to-[#e0115f]/[0.02] dark:from-[#e0115f]/[0.08] dark:via-[#e0115f]/[0.04] dark:to-[#e0115f]/[0.12] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
@@ -361,7 +365,7 @@ export default function Home() {
                   <div className="text-sm font-medium text-[#e0115f]/80 dark:text-[#ff1a6b] mb-3 sm:mb-4">{item.subtitle}</div>
                   <p className="text-sm sm:text-sm lg:text-base text-foreground/60 dark:text-foreground/80 leading-relaxed group-hover:text-foreground/70 dark:group-hover:text-foreground/90 transition-colors duration-300">{item.description}</p>
                 </div>
-              </div>
+              </ParallaxCard>
             ))}
           </div>
         </div>
@@ -384,7 +388,12 @@ export default function Home() {
           </p>
           <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {/* Strategy Session */}
-            <div className="fade-on-scroll opacity-0 hover-lift p-6 sm:p-8 lg:p-10 rounded-2xl border-2 border-foreground/10 dark:border-[#e0115f]/20 bg-background dark:bg-black">
+            <ParallaxCard
+              delay={0}
+              parallaxStrength={12}
+              hoverLift={6}
+              className="p-6 sm:p-8 lg:p-10 rounded-2xl border-2 border-foreground/10 dark:border-[#e0115f]/20 bg-background dark:bg-black shadow-lg hover:shadow-xl transition-shadow duration-300"
+            >
               <div className="flex items-center gap-3 sm:gap-4 mb-6">
                 <div className="w-12 h-12 rounded-lg border-2 border-[#e0115f]/20 flex items-center justify-center flex-shrink-0">
                   <svg className="w-6 h-6 text-[#e0115f]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -436,10 +445,15 @@ export default function Home() {
                   <span className="text-[#e0115f] font-medium text-sm">Credit applies if you hire us</span>
                 </div>
               </div>
-            </div>
+            </ParallaxCard>
 
             {/* MVP Build */}
-            <div className="fade-on-scroll opacity-0 hover-lift p-6 sm:p-8 lg:p-10 rounded-2xl border-2 border-[#e0115f]/20 bg-background dark:bg-black">
+            <ParallaxCard
+              delay={0.1}
+              parallaxStrength={12}
+              hoverLift={6}
+              className="p-6 sm:p-8 lg:p-10 rounded-2xl border-2 border-[#e0115f]/20 bg-background dark:bg-black shadow-lg hover:shadow-xl transition-shadow duration-300"
+            >
               <div className="flex items-center gap-3 sm:gap-4 mb-6">
                 <div className="w-12 h-12 rounded-lg ruby-gradient flex items-center justify-center flex-shrink-0 shadow-lg shadow-[#e0115f]/20">
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -500,13 +514,18 @@ export default function Home() {
                   <svg className="w-5 h-5 text-[#e0115f] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-foreground/70">Bi-weekly progress updates</span>
+                  <span className="text-foreground/70">Check-in meetings 2x/week</span>
                 </div>
               </div>
-            </div>
+            </ParallaxCard>
 
             {/* Growth Build */}
-            <div className="fade-on-scroll opacity-0 hover-lift p-6 sm:p-8 lg:p-10 rounded-2xl border-2 border-[#e0115f]/30 bg-background dark:bg-black relative overflow-hidden shadow-lg shadow-[#e0115f]/5 dark:shadow-[#e0115f]/20">
+            <ParallaxCard
+              delay={0.2}
+              parallaxStrength={12}
+              hoverLift={8}
+              className="p-6 sm:p-8 lg:p-10 rounded-2xl border-2 border-[#e0115f]/30 bg-background dark:bg-black relative overflow-hidden shadow-xl shadow-[#e0115f]/10 dark:shadow-[#e0115f]/25 hover:shadow-2xl transition-shadow duration-300"
+            >
               <div className="ruby-gradient-subtle absolute inset-0 opacity-5 dark:opacity-20"></div>
               <div className="relative z-10">
                 <div className="flex items-center gap-3 sm:gap-4 mb-6">
@@ -569,11 +588,11 @@ export default function Home() {
                     <svg className="w-5 h-5 text-[#e0115f] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-foreground/70">Tri-weekly progress updates</span>
+                    <span className="text-foreground/70">Check-in meetings 3x/week</span>
                   </div>
                 </div>
               </div>
-            </div>
+            </ParallaxCard>
           </div>
         </div>
       </section>
@@ -606,14 +625,16 @@ export default function Home() {
                 description: "Every app we build uses production-ready patterns from day one. Scale from MVP to thousands of users without rewriting or refactoring.",
               },
             ].map((feature, idx) => (
-              <div
+              <ParallaxCard
                 key={idx}
-                className="fade-on-scroll opacity-0 hover-lift p-6 sm:p-8 lg:p-10 rounded-2xl border border-foreground/5 dark:border-[#e0115f]/20 hover:border-[#e0115f]/30 dark:hover:border-[#e0115f]/40 transition-all duration-300 bg-background dark:bg-black/80"
-                style={{ animationDelay: `${idx * 0.1}s` }}
+                delay={idx * 0.1}
+                parallaxStrength={18}
+                hoverLift={5}
+                className="p-6 sm:p-8 lg:p-10 rounded-2xl border border-foreground/5 dark:border-[#e0115f]/20 hover:border-[#e0115f]/30 dark:hover:border-[#e0115f]/40 transition-all duration-300 bg-background dark:bg-black/80 shadow-md hover:shadow-lg"
               >
                 <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-4 no-break-words">{feature.title}</h3>
                 <p className="text-base sm:text-lg text-foreground/60 dark:text-foreground/80 leading-relaxed">{feature.description}</p>
-              </div>
+              </ParallaxCard>
             ))}
           </div>
           <div className="mt-12 sm:mt-16 text-center fade-on-scroll opacity-0">
