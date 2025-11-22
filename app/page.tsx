@@ -121,7 +121,7 @@ export default function Home() {
         },
         {
           q: "Can Dogfood Digital help me validate my app idea?",
-          a: "Absolutely. We start by building core functionality to validate your concept fast — so you can prove traction before investing big. Our 2-4 week MVP builds are perfect for testing ideas and getting to market quickly.",
+          a: "Absolutely. We start by building core functionality to validate your concept fast — so you can prove traction before investing big. Our 0-4 week MVP builds are perfect for testing ideas and getting to market quickly.",
         },
       ],
     },
@@ -134,7 +134,7 @@ export default function Home() {
         },
         {
           q: "How long does it take to build an app with Dogfood Digital?",
-          a: "MVPs typically take 2-4 weeks from kickoff to launch. Our deep expertise in RubyOnVibes and Rails means we can move faster than agencies learning the stack. Ongoing sprints run bi-weekly for continuous improvement.",
+          a: "MVPs typically take 0-4 weeks from kickoff to launch. Our deep expertise in RubyOnVibes and Rails means we can move faster than agencies learning the stack. Ongoing sprints run bi-weekly for continuous improvement.",
         },
         {
           q: "Do you offer ongoing support after launch?",
@@ -161,8 +161,8 @@ export default function Home() {
     <div className="scroll-smooth dark:bg-black">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-foreground/5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-5 flex justify-between items-center">
-          <div className="text-base sm:text-lg font-semibold">Dogfood Digital</div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center">
+          <img src="/dogfood-logo.png" alt="Dogfood Digital" className="h-10 sm:h-11 w-auto -ml-1" style={{ filter: isDarkMode ? 'invert(1) brightness(1.2)' : 'none' }} />
           <div className="hidden md:flex items-center gap-8 text-sm">
             <a href="#how-we-work" className="text-foreground/60 hover:text-foreground transition-colors">How We Work</a>
             <a href="#pricing" className="text-foreground/60 hover:text-foreground transition-colors">Pricing</a>
@@ -209,16 +209,26 @@ export default function Home() {
       <section className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 py-32 pt-32 relative overflow-hidden dark:bg-black">
         <div ref={(el) => { parallaxRefs.current[0] = el; }} className="geometric-splash geometric-splash-1 parallax-slow"></div>
         <div ref={(el) => { parallaxRefs.current[1] = el; }} className="geometric-splash geometric-splash-2 parallax-fast"></div>
-        {/* Red atmospheric glow for dark mode */}
-        <div className="hidden dark:block absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#e0115f]/15 via-black to-black opacity-40 pointer-events-none"></div>
+        {/* Red spot glows - light mode */}
+        <div className="dark:hidden absolute top-20 left-1/4 w-[400px] h-[400px] bg-[#e0115f]/20 rounded-full blur-[100px] pointer-events-none"></div>
+        <div className="dark:hidden absolute bottom-1/4 right-1/4 w-[350px] h-[350px] bg-[#e0115f]/15 rounded-full blur-[90px] pointer-events-none"></div>
+        {/* Red spot glows - dark mode */}
+        <div className="hidden dark:block absolute top-20 left-1/4 w-[400px] h-[400px] bg-[#e0115f]/25 rounded-full blur-[100px] pointer-events-none"></div>
+        <div className="hidden dark:block absolute bottom-1/4 right-1/4 w-[350px] h-[350px] bg-[#e0115f]/20 rounded-full blur-[90px] pointer-events-none"></div>
         <div className="max-w-5xl mx-auto text-center space-y-8 sm:space-y-12 fade-on-scroll opacity-0 relative z-10 w-full">
           <div className="space-y-6">
-            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-tight leading-tight sm:leading-[0.95] px-2">
-              <span className="text-foreground block sm:inline">Built by the </span>
-              <span className="ruby-text-gradient block sm:inline">makers of RubyOnVibes</span>
+            <div className="flex justify-center mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-background dark:bg-white/5 border border-foreground/10 dark:border-[#e0115f]/50">
+                <span className="text-sm font-medium text-foreground/80">Official partner of</span>
+                <a href="https://www.rubyonvibes.com/" target="_blank" rel="noopener noreferrer" className="text-sm font-semibold ruby-text-gradient hover:opacity-80 transition-opacity">RubyOnVibes</a>
+              </div>
+            </div>
+            <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-tight sm:leading-[0.95] px-2">
+              <span className="text-foreground">The partner for </span>
+              <span className="ruby-text-gradient">AI native founders</span>
             </h1>
-            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-foreground/60 max-w-3xl mx-auto leading-relaxed font-light px-4">
-              The in-house agency behind RubyOnVibes — building production-ready apps with the tools we build ourselves.
+            <p className="text-lg sm:text-xl md:text-2xl text-foreground/60 max-w-3xl mx-auto leading-relaxed font-light px-4">
+              The in-house agency behind RubyOnVibes — building full-stack apps with Rails, React, and the tools we build ourselves.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4 px-4">
@@ -241,11 +251,15 @@ export default function Home() {
       {/* Stats Section */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 border-y border-foreground/5 relative overflow-hidden dark:bg-black dark:border-[#e0115f]/20">
         <div ref={(el) => { parallaxRefs.current[2] = el; }} className="geometric-splash geometric-splash-3 parallax-slow"></div>
+        {/* Red spot glows - light mode */}
+        <div className="dark:hidden absolute top-1/2 left-1/3 w-[400px] h-[400px] bg-[#e0115f]/12 rounded-full blur-[90px] pointer-events-none"></div>
+        {/* Red spot glows - dark mode */}
+        <div className="hidden dark:block absolute top-1/2 left-1/3 w-[400px] h-[400px] bg-[#e0115f]/20 rounded-full blur-[90px] pointer-events-none"></div>
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
             {[
               { value: "100%", label: "Stack Dogfooding", sublabel: "Every project uses our own tools" },
-              { value: "2-4", label: "Weeks to MVP", sublabel: "Fast iteration, real results" },
+              { value: "0-4", label: "Weeks to MVP", sublabel: "Fast iteration, real results" },
               { value: "∞", label: "Continuous Improvement", sublabel: "Every build makes the stack better" },
             ].map((stat, idx) => (
               <div
@@ -263,8 +277,12 @@ export default function Home() {
       </section>
 
       {/* What Is Dogfood Digital */}
-      <section className="py-20 sm:py-32 px-4 sm:px-6 dark:bg-black">
-        <div className="max-w-4xl mx-auto fade-on-scroll opacity-0">
+      <section className="py-20 sm:py-32 px-4 sm:px-6 dark:bg-black relative overflow-hidden">
+        {/* Red spot glows - light mode */}
+        <div className="dark:hidden absolute top-1/3 right-1/4 w-[350px] h-[350px] bg-[#e0115f]/14 rounded-full blur-[95px] pointer-events-none"></div>
+        {/* Red spot glows - dark mode */}
+        <div className="hidden dark:block absolute top-1/3 right-1/4 w-[350px] h-[350px] bg-[#e0115f]/22 rounded-full blur-[95px] pointer-events-none"></div>
+        <div className="max-w-4xl mx-auto fade-on-scroll opacity-0 relative z-10">
           <div className="space-y-6">
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4">
               Dogfood Digital
@@ -280,9 +298,12 @@ export default function Home() {
       <section id="how-we-work" className="py-20 sm:py-32 px-4 sm:px-6 relative overflow-hidden bg-white dark:bg-black">
         <div className="animated-gradient absolute inset-0 opacity-[0.03] dark:opacity-[0.2]"></div>
         <div ref={(el) => { parallaxRefs.current[3] = el; }} className="geometric-splash geometric-splash-1 parallax-slow opacity-0 dark:opacity-[0.3]" style={{ top: "10%", right: "-10%" }}></div>
-        {/* Red atmospheric glows for dark mode only */}
-        <div className="hidden dark:block absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#e0115f]/25 via-black to-black opacity-70 pointer-events-none"></div>
-        <div className="hidden dark:block absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-[#e0115f]/15 via-transparent to-black opacity-50 pointer-events-none"></div>
+        {/* Red spot glows - light mode */}
+        <div className="dark:hidden absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-[#e0115f]/15 rounded-full blur-[120px] pointer-events-none"></div>
+        <div className="dark:hidden absolute bottom-1/3 left-1/3 w-[450px] h-[450px] bg-[#e0115f]/12 rounded-full blur-[110px] pointer-events-none"></div>
+        {/* Red spot glows - dark mode */}
+        <div className="hidden dark:block absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-[#e0115f]/30 rounded-full blur-[120px] pointer-events-none"></div>
+        <div className="hidden dark:block absolute bottom-1/3 left-1/3 w-[450px] h-[450px] bg-[#e0115f]/25 rounded-full blur-[110px] pointer-events-none"></div>
         <div className="max-w-7xl mx-auto relative z-10">
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-center tracking-tight fade-on-scroll opacity-0">
             How We Work
@@ -291,14 +312,11 @@ export default function Home() {
             We simplify complex builds into fast, focused sprints that ship real results every week.
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 relative">
-            {/* Connecting line for desktop */}
-            <div className="hidden lg:block absolute top-12 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#e0115f]/20 dark:via-[#e0115f]/50 to-transparent pointer-events-none"></div>
-            
             {[
               {
                 step: "01",
                 title: "Build",
-                subtitle: "Your MVP in 2-4 weeks",
+                subtitle: "Your MVP in 0-4 weeks",
                 description: "We start by designing and developing core functionality to validate your concept fast — so you can prove traction before investing big.",
               },
               {
@@ -331,17 +349,12 @@ export default function Home() {
                 {/* Subtle red glow in dark mode */}
                 <div className="absolute inset-0 bg-gradient-to-br from-[#e0115f]/0 via-transparent to-[#e0115f]/0 dark:from-[#e0115f]/[0.05] dark:via-[#e0115f]/[0.02] dark:to-[#e0115f]/[0.08] pointer-events-none"></div>
                 
-                {/* Large number background */}
-                <div className="absolute -right-4 -top-2 text-[120px] font-bold text-foreground/[0.02] dark:text-[#e0115f]/[0.15] group-hover:text-[#e0115f]/[0.05] dark:group-hover:text-[#e0115f]/[0.25] transition-all duration-500 leading-none select-none">
-                  {item.step}
-                </div>
-                
                 <div className="relative z-10">
                   <div className="flex items-center gap-3 mb-3 sm:mb-4">
                     <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#e0115f]/10 to-[#e0115f]/5 dark:from-[#e0115f]/30 dark:to-[#e0115f]/20 flex items-center justify-center group-hover:from-[#e0115f]/20 group-hover:to-[#e0115f]/10 dark:group-hover:from-[#e0115f]/50 dark:group-hover:to-[#e0115f]/30 transition-all duration-300 shadow-sm dark:shadow-[#e0115f]/20">
                       <span className="text-sm font-mono text-[#e0115f] dark:text-[#ff1a6b] font-bold">{item.step}</span>
                     </div>
-                    <div className="h-px flex-1 bg-gradient-to-r from-[#e0115f]/20 via-[#e0115f]/10 to-transparent dark:from-[#e0115f]/40 dark:via-[#e0115f]/20"></div>
+                    <div className="h-[1px] flex-1 bg-gradient-to-r from-[#e0115f]/30 via-[#e0115f]/15 to-transparent" style={{ background: isDarkMode ? 'linear-gradient(to right, #e0115f, rgba(224, 17, 95, 0.5), transparent)' : undefined }}></div>
                   </div>
                   
                   <h3 className="text-2xl font-bold mb-2 no-break-words group-hover:text-[#e0115f] dark:group-hover:text-[#ff1a6b] transition-colors duration-300">{item.title}</h3>
@@ -356,8 +369,12 @@ export default function Home() {
 
       {/* Pricing Section */}
       <section id="pricing" className="py-20 sm:py-32 px-4 sm:px-6 bg-background dark:bg-black relative overflow-hidden">
-        {/* Subtle red glow for dark mode */}
-        <div className="hidden dark:block absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-[#e0115f]/10 via-transparent to-black opacity-50 pointer-events-none"></div>
+        {/* Red spot glows - light mode */}
+        <div className="dark:hidden absolute top-1/3 left-1/4 w-[450px] h-[450px] bg-[#e0115f]/18 rounded-full blur-[110px] pointer-events-none"></div>
+        <div className="dark:hidden absolute bottom-1/4 right-1/3 w-[400px] h-[400px] bg-[#e0115f]/15 rounded-full blur-[100px] pointer-events-none"></div>
+        {/* Red spot glows - dark mode */}
+        <div className="hidden dark:block absolute top-1/3 left-1/4 w-[450px] h-[450px] bg-[#e0115f]/28 rounded-full blur-[110px] pointer-events-none"></div>
+        <div className="hidden dark:block absolute bottom-1/4 right-1/3 w-[400px] h-[400px] bg-[#e0115f]/22 rounded-full blur-[100px] pointer-events-none"></div>
         <div className="max-w-7xl mx-auto relative z-10">
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-center tracking-tight fade-on-scroll opacity-0">
             Pricing
@@ -389,7 +406,7 @@ export default function Home() {
               </div>
               <a
                 href="#contact"
-                className="block w-full px-6 py-3 border-2 border-[#e0115f]/30 text-[#e0115f] font-medium rounded-lg hover:bg-[#e0115f]/10 hover:border-[#e0115f]/50 transition-all duration-300 text-center mb-6"
+                className="block w-full px-6 py-3 bg-[#e0115f] text-white font-medium rounded-lg hover:bg-[#b80d4a] transition-all duration-300 text-center mb-6 ruby-glow"
               >
                 Book a Call
               </a>
@@ -431,7 +448,7 @@ export default function Home() {
                 </div>
                 <div>
                   <h3 className="text-xl sm:text-2xl font-bold no-break-words whitespace-nowrap">MVP Build</h3>
-                  <p className="text-xs sm:text-sm text-foreground/60">We deliver an MVP in 2-4 weeks</p>
+                  <p className="text-xs sm:text-sm text-foreground/60">We deliver an MVP in 0-4 weeks</p>
                 </div>
               </div>
               <p className="text-foreground/70 mb-6 leading-relaxed">
@@ -562,8 +579,12 @@ export default function Home() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-20 sm:py-32 px-4 sm:px-6 bg-background dark:bg-black">
-        <div className="max-w-7xl mx-auto">
+      <section className="py-20 sm:py-32 px-4 sm:px-6 bg-background dark:bg-black relative overflow-hidden">
+        {/* Red spot glows - light mode */}
+        <div className="dark:hidden absolute top-1/4 left-1/3 w-[420px] h-[420px] bg-[#e0115f]/16 rounded-full blur-[105px] pointer-events-none"></div>
+        {/* Red spot glows - dark mode */}
+        <div className="hidden dark:block absolute top-1/4 left-1/3 w-[420px] h-[420px] bg-[#e0115f]/24 rounded-full blur-[105px] pointer-events-none"></div>
+        <div className="max-w-7xl mx-auto relative z-10">
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-center tracking-tight fade-on-scroll opacity-0">
             Why Choose <span className="ruby-text-gradient">Dogfood Digital</span>
           </h2>
@@ -608,8 +629,12 @@ export default function Home() {
         <div className="animated-gradient absolute inset-0 opacity-[0.02] dark:opacity-[0.12]"></div>
         <div ref={(el) => { parallaxRefs.current[4] = el; }} className="geometric-splash geometric-splash-2 parallax-fast" style={{ top: '10%', right: '-5%', opacity: '0.08' }}></div>
         <div ref={(el) => { parallaxRefs.current[5] = el; }} className="geometric-splash geometric-splash-3 parallax-slow" style={{ bottom: '20%', left: '-5%', opacity: '0.06' }}></div>
-        {/* Subtle red ambient glow for dark mode */}
-        <div className="hidden dark:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#e0115f]/5 rounded-full blur-[120px] pointer-events-none"></div>
+        {/* Red spot glows - light mode */}
+        <div className="dark:hidden absolute top-1/3 right-1/3 w-[500px] h-[500px] bg-[#e0115f]/14 rounded-full blur-[120px] pointer-events-none"></div>
+        <div className="dark:hidden absolute bottom-1/4 left-1/4 w-[450px] h-[450px] bg-[#e0115f]/10 rounded-full blur-[110px] pointer-events-none"></div>
+        {/* Red spot glows - dark mode */}
+        <div className="hidden dark:block absolute top-1/3 right-1/3 w-[500px] h-[500px] bg-[#e0115f]/22 rounded-full blur-[120px] pointer-events-none"></div>
+        <div className="hidden dark:block absolute bottom-1/4 left-1/4 w-[450px] h-[450px] bg-[#e0115f]/18 rounded-full blur-[110px] pointer-events-none"></div>
         <div className="max-w-4xl mx-auto relative z-10">
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-12 sm:mb-20 text-center tracking-tight fade-on-scroll opacity-0">
             FAQs
@@ -666,8 +691,10 @@ export default function Home() {
             backgroundSize: '40px 40px'
           }}></div>
         </div>
-        {/* Strong red glow for dark mode */}
-        <div className="hidden dark:block absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#e0115f]/30 via-[#e0115f]/10 to-black opacity-80 pointer-events-none"></div>
+        {/* Red spot glows - light mode */}
+        <div className="dark:hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#e0115f]/25 rounded-full blur-[140px] pointer-events-none"></div>
+        {/* Red spot glows - dark mode */}
+        <div className="hidden dark:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#e0115f]/40 rounded-full blur-[140px] pointer-events-none"></div>
         <div className="max-w-4xl mx-auto text-center fade-on-scroll opacity-0 relative z-10">
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 sm:mb-8 tracking-tight px-4">
             <span className="ruby-text-gradient">Start your project</span>
@@ -677,7 +704,7 @@ export default function Home() {
             Ready to build something great? Let's talk about your project.
           </p>
           <a
-            href="mailto:hello@dogfood.digital"
+            href="/start-project"
             className="inline-block px-8 sm:px-10 py-4 sm:py-5 bg-[#e0115f] text-white font-medium rounded-xl hover:bg-[#b80d4a] transition-all duration-300 hover:scale-105 hover:shadow-2xl text-base sm:text-lg ruby-glow"
           >
             Start a Project
@@ -689,7 +716,7 @@ export default function Home() {
       <footer className="py-12 sm:py-16 px-4 sm:px-6 bg-background dark:bg-black border-t border-foreground/5 dark:border-[#e0115f]/20">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6 sm:gap-8 pb-6 sm:pb-8 border-b border-foreground/5">
-            <div className="text-lg sm:text-xl font-semibold">Dogfood Digital</div>
+            <img src="/dogfood-logo.png" alt="Dogfood Digital" className="h-14 sm:h-16 w-auto" style={{ filter: isDarkMode ? 'invert(1) brightness(1.2)' : 'none' }} />
             <div className="flex flex-wrap justify-center gap-4 sm:gap-8 text-sm">
               <a
                 href="#how-we-work"
