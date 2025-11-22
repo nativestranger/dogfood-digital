@@ -107,20 +107,20 @@ export default function ParallaxCard({
       transition: {
         duration,
         delay,
-        ease: [0.25, 0.46, 0.45, 0.94], // Custom easeOut curve
+        ease: "easeOut" as const,
       },
     },
   };
 
   // Hover animation
   const hoverVariants = shouldReduceMotion
-    ? {}
+    ? undefined
     : {
         scale: 1.01,
         y: -hoverLift,
         transition: {
           duration: 0.3,
-          ease: "easeOut",
+          ease: "easeOut" as const,
         },
       };
 
