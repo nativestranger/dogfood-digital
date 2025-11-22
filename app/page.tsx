@@ -163,7 +163,7 @@ export default function Home() {
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-foreground/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center">
-          <img src="/dogfood-logo.png" alt="Dogfood Digital" className="h-10 sm:h-11 w-auto -ml-1" style={{ filter: isDarkMode ? 'invert(1) brightness(1.2)' : 'none' }} />
+          <img src="/dogfood-logo.png" alt="Dogfood Digital" className="h-10 sm:h-11 w-auto -ml-1" style={{ filter: isDarkMode ? 'invert(1) brightness(1.2)' : 'none' }} suppressHydrationWarning />
           <div className="hidden md:flex items-center gap-8 text-sm">
             <a href="#how-we-work" className="text-foreground/60 hover:text-foreground transition-colors">How We Work</a>
             <a href="#pricing" className="text-foreground/60 hover:text-foreground transition-colors">Pricing</a>
@@ -748,7 +748,7 @@ export default function Home() {
       <footer className="py-12 sm:py-16 px-4 sm:px-6 bg-background dark:bg-black border-t border-foreground/5 dark:border-[#e0115f]/20">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6 sm:gap-8 pb-6 sm:pb-8 border-b border-foreground/5">
-            <img src="/dogfood-logo.png" alt="Dogfood Digital" className="h-14 sm:h-16 w-auto" style={{ filter: isDarkMode ? 'invert(1) brightness(1.2)' : 'none' }} />
+            <img src="/dogfood-logo.png" alt="Dogfood Digital" className="h-14 sm:h-16 w-auto" style={{ filter: isDarkMode ? 'invert(1) brightness(1.2)' : 'none' }} suppressHydrationWarning />
             <div className="flex flex-wrap justify-center gap-4 sm:gap-8 text-sm">
               <a
                 href="#how-we-work"
