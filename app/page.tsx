@@ -172,6 +172,7 @@ export default function Home() {
               onClick={toggleTheme}
               className="p-2 rounded-lg hover:bg-foreground/5 transition-all duration-300"
               aria-label="Toggle theme"
+              suppressHydrationWarning
             >
               {isDarkMode ? (
                 <svg className="w-5 h-5 text-foreground/60 hover:text-foreground transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -196,6 +197,7 @@ export default function Home() {
               onClick={toggleTheme}
               className="p-2 rounded-lg hover:bg-foreground/5 transition-all duration-300"
               aria-label="Toggle theme"
+              suppressHydrationWarning
             >
               {isDarkMode ? (
                 <svg className="w-5 h-5 text-foreground/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -369,7 +371,7 @@ export default function Home() {
                     <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#e0115f]/10 to-[#e0115f]/5 dark:from-[#e0115f]/30 dark:to-[#e0115f]/20 flex items-center justify-center group-hover:from-[#e0115f]/20 group-hover:to-[#e0115f]/10 dark:group-hover:from-[#e0115f]/50 dark:group-hover:to-[#e0115f]/30 transition-all duration-300 shadow-sm dark:shadow-[#e0115f]/20">
                       <span className="text-sm font-mono text-[#e0115f] dark:text-[#ff1a6b] font-bold">{item.step}</span>
                     </div>
-                    <div className="h-[1px] flex-1 bg-gradient-to-r from-[#e0115f]/30 via-[#e0115f]/15 to-transparent" style={{ background: isDarkMode ? 'linear-gradient(to right, #e0115f, rgba(224, 17, 95, 0.5), transparent)' : undefined }}></div>
+                    <div className="h-[1px] flex-1 bg-gradient-to-r from-[#e0115f]/30 via-[#e0115f]/15 to-transparent" style={{ background: isDarkMode ? 'linear-gradient(to right, #e0115f, rgba(224, 17, 95, 0.5), transparent)' : undefined }} suppressHydrationWarning></div>
                   </div>
                   
                   <h3 className="text-2xl font-bold mb-2 no-break-words group-hover:text-[#e0115f] dark:group-hover:text-[#ff1a6b] transition-colors duration-300">{item.title}</h3>
