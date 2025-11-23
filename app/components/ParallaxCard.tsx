@@ -81,6 +81,7 @@ export default function ParallaxCard({
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"], // Track from when it enters to when it leaves
+    layoutEffect: false, // Use useEffect instead of useLayoutEffect for SSR compatibility
   });
 
   // Map scroll progress to parallax movement

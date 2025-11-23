@@ -15,11 +15,12 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Dogfood Digital — We Build What We Use",
   description: "The in-house agency behind RubyOnVibes — building real production apps to validate and improve the Vibes stack.",
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 5,
-  },
+};
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
 };
 
 export default function RootLayout({

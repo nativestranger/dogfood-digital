@@ -7,26 +7,25 @@ import Link from "next/link";
 export default function Home() {
   const observerRef = useRef<IntersectionObserver | null>(null);
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    // Initialize from localStorage if available (prevents flash)
-    if (typeof window !== 'undefined') {
-      const savedTheme = localStorage.getItem('theme');
-      return savedTheme !== 'light';
-    }
-    return true; // Default to dark mode
-  });
+  const [isDarkMode, setIsDarkMode] = useState(true); // Default to dark, will sync on mount
+  const [mounted, setMounted] = useState(false); // Track if component has mounted
   const parallaxRefs = useRef<(HTMLDivElement | null)[]>([]);
 
+  // Sync theme on mount
   useEffect(() => {
-    // Sync document classes with state on mount
-    if (isDarkMode) {
+    setMounted(true);
+    const savedTheme = localStorage.getItem('theme');
+    const shouldBeDark = savedTheme !== 'light';
+    setIsDarkMode(shouldBeDark);
+    
+    if (shouldBeDark) {
       document.documentElement.classList.add('dark');
       document.documentElement.classList.remove('light');
     } else {
       document.documentElement.classList.add('light');
       document.documentElement.classList.remove('dark');
     }
-  }, [isDarkMode]);
+  }, []);
 
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
@@ -159,11 +158,16 @@ export default function Home() {
   ];
 
   return (
-    <div className="scroll-smooth dark:bg-black">
+    <div className="scroll-smooth dark:bg-black relative">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-foreground/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center">
-          <img src="/dogfood-logo.png" alt="Dogfood Digital" className="h-10 sm:h-11 w-auto -ml-1" style={{ filter: isDarkMode ? 'invert(1) brightness(1.2)' : 'none' }} suppressHydrationWarning />
+          <img 
+            src="/dogfood-logo.png" 
+            alt="Dogfood Digital" 
+            className="h-10 sm:h-11 w-auto -ml-1" 
+            style={{ filter: mounted && isDarkMode ? 'invert(1) brightness(1.2)' : 'none' }} 
+          />
           <div className="hidden md:flex items-center gap-8 text-sm">
             <a href="#how-we-work" className="text-foreground/60 hover:text-foreground transition-colors">How We Work</a>
             <a href="#pricing" className="text-foreground/60 hover:text-foreground transition-colors">Pricing</a>
@@ -172,9 +176,8 @@ export default function Home() {
               onClick={toggleTheme}
               className="p-2 rounded-lg hover:bg-foreground/5 transition-all duration-300"
               aria-label="Toggle theme"
-              suppressHydrationWarning
             >
-              {isDarkMode ? (
+              {mounted && isDarkMode ? (
                 <svg className="w-5 h-5 text-foreground/60 hover:text-foreground transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                 </svg>
@@ -197,9 +200,8 @@ export default function Home() {
               onClick={toggleTheme}
               className="p-2 rounded-lg hover:bg-foreground/5 transition-all duration-300"
               aria-label="Toggle theme"
-              suppressHydrationWarning
             >
-              {isDarkMode ? (
+              {mounted && isDarkMode ? (
                 <svg className="w-5 h-5 text-foreground/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                 </svg>
@@ -371,7 +373,7 @@ export default function Home() {
                     <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#e0115f]/10 to-[#e0115f]/5 dark:from-[#e0115f]/30 dark:to-[#e0115f]/20 flex items-center justify-center group-hover:from-[#e0115f]/20 group-hover:to-[#e0115f]/10 dark:group-hover:from-[#e0115f]/50 dark:group-hover:to-[#e0115f]/30 transition-all duration-300 shadow-sm dark:shadow-[#e0115f]/20">
                       <span className="text-sm font-mono text-[#e0115f] dark:text-[#ff1a6b] font-bold">{item.step}</span>
                     </div>
-                    <div className="h-[1px] flex-1 bg-gradient-to-r from-[#e0115f]/30 via-[#e0115f]/15 to-transparent" style={{ background: isDarkMode ? 'linear-gradient(to right, #e0115f, rgba(224, 17, 95, 0.5), transparent)' : undefined }} suppressHydrationWarning></div>
+                    <div className="h-[1px] flex-1 bg-gradient-to-r from-[#e0115f]/30 via-[#e0115f]/15 to-transparent" style={{ background: mounted && isDarkMode ? 'linear-gradient(to right, #e0115f, rgba(224, 17, 95, 0.5), transparent)' : undefined }}></div>
                   </div>
                   
                   <h3 className="text-2xl font-bold mb-2 no-break-words group-hover:text-[#e0115f] dark:group-hover:text-[#ff1a6b] transition-colors duration-300">{item.title}</h3>
@@ -726,9 +728,9 @@ export default function Home() {
           }}></div>
         </div>
         {/* Red spot glows - light mode */}
-        <div className="dark:hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#e0115f]/25 rounded-full blur-[140px] pointer-events-none"></div>
+        <div className="hidden sm:block dark:hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#e0115f]/25 rounded-full blur-[140px] pointer-events-none"></div>
         {/* Red spot glows - dark mode */}
-        <div className="hidden dark:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#e0115f]/40 rounded-full blur-[140px] pointer-events-none"></div>
+        <div className="hidden sm:dark:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#e0115f]/40 rounded-full blur-[140px] pointer-events-none"></div>
         <div className="max-w-4xl mx-auto text-center fade-on-scroll opacity-0 relative z-10">
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 sm:mb-8 tracking-tight px-4">
             <span className="ruby-text-gradient">Start your project</span>
@@ -750,7 +752,12 @@ export default function Home() {
       <footer className="py-12 sm:py-16 px-4 sm:px-6 bg-background dark:bg-black border-t border-foreground/5 dark:border-[#e0115f]/20">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6 sm:gap-8 pb-6 sm:pb-8 border-b border-foreground/5">
-            <img src="/dogfood-logo.png" alt="Dogfood Digital" className="h-14 sm:h-16 w-auto" style={{ filter: isDarkMode ? 'invert(1) brightness(1.2)' : 'none' }} suppressHydrationWarning />
+            <img 
+              src="/dogfood-logo.png" 
+              alt="Dogfood Digital" 
+              className="h-14 sm:h-16 w-auto" 
+              style={{ filter: mounted && isDarkMode ? 'invert(1) brightness(1.2)' : 'none' }} 
+            />
             <div className="flex flex-wrap justify-center gap-4 sm:gap-8 text-sm">
               <a
                 href="#how-we-work"
