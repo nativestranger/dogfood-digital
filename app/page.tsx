@@ -14,8 +14,7 @@ export default function Home() {
   // Sync theme on mount
   useEffect(() => {
     setMounted(true);
-    const savedTheme = localStorage.getItem('theme');
-    const shouldBeDark = savedTheme !== 'light';
+    const shouldBeDark = true;
     setIsDarkMode(shouldBeDark);
     
     if (shouldBeDark) {
@@ -121,7 +120,7 @@ export default function Home() {
         },
         {
           q: "Can Dogfood Digital help me validate my app idea?",
-          a: "Absolutely. We start by building core functionality to validate your concept fast — so you can prove traction before investing big. Our 0-4 week MVP builds are perfect for testing ideas and getting to market quickly.",
+          a: "Absolutely. We start by building core functionality to validate your concept fast — so you can prove traction before investing big. Our 0-3 week MVP builds are perfect for testing ideas and getting to market quickly.",
         },
       ],
     },
@@ -134,7 +133,7 @@ export default function Home() {
         },
         {
           q: "How long does it take to build an app with Dogfood Digital?",
-          a: "MVPs typically take 0-4 weeks from kickoff to launch. Our deep expertise in RubyOnVibes and Rails means we can move faster than agencies learning the stack. Ongoing sprints run bi-weekly for continuous improvement.",
+          a: "MVPs typically take 0-3 weeks from kickoff to launch. Our deep expertise in RubyOnVibes and Rails means we can move faster than agencies learning the stack. Ongoing sprints run bi-weekly for continuous improvement.",
         },
         {
           q: "Do you offer ongoing support after launch?",
@@ -161,32 +160,17 @@ export default function Home() {
     <div className="scroll-smooth dark:bg-black relative">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-foreground/5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center">
           <img 
             src="/dogfood-logo.png" 
             alt="Dogfood Digital" 
-            className="h-10 sm:h-11 w-auto -ml-1" 
+            className="h-10 sm:h-11 w-auto -ml-1 flex-shrink-0" 
             style={{ filter: mounted && isDarkMode ? 'invert(1) brightness(1.2)' : 'none' }} 
           />
-          <div className="hidden md:flex items-center gap-8 text-sm">
+          <div className="hidden md:flex items-center gap-6 text-sm ml-auto">
             <a href="#how-we-work" className="text-foreground/60 hover:text-foreground transition-colors">How We Work</a>
             <a href="#pricing" className="text-foreground/60 hover:text-foreground transition-colors">Pricing</a>
             <a href="#faq" className="text-foreground/60 hover:text-foreground transition-colors">FAQ</a>
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-lg hover:bg-foreground/5 transition-all duration-300"
-              aria-label="Toggle theme"
-            >
-              {mounted && isDarkMode ? (
-                <svg className="w-5 h-5 text-foreground/60 hover:text-foreground transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-              ) : (
-                <svg className="w-5 h-5 text-foreground/60 hover:text-foreground transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                </svg>
-              )}
-            </button>
             <Link
               href="/apply"
               className="px-5 py-2.5 bg-[#e0115f] text-white rounded-lg hover:bg-[#b80d4a] transition-all duration-300 font-medium ruby-glow"
@@ -195,22 +179,7 @@ export default function Home() {
             </Link>
             <a href="#contact" className="px-5 py-2.5 border-2 border-[#e0115f]/30 text-[#e0115f] rounded-lg hover:bg-[#e0115f]/10 transition-all duration-300 font-medium">Start a Project</a>
           </div>
-          <div className="md:hidden flex items-center gap-3">
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-lg hover:bg-foreground/5 transition-all duration-300"
-              aria-label="Toggle theme"
-            >
-              {mounted && isDarkMode ? (
-                <svg className="w-5 h-5 text-foreground/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-              ) : (
-                <svg className="w-5 h-5 text-foreground/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                </svg>
-              )}
-            </button>
+          <div className="md:hidden flex items-center gap-3 ml-auto">
             <Link
               href="/apply"
               className="px-4 py-2 bg-[#e0115f] text-white rounded-lg text-sm font-medium"
@@ -275,7 +244,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
             {[
               { value: "100%", label: "Stack Dogfooding", sublabel: "Every project uses our own tools" },
-              { value: "0-4", label: "Weeks to MVP", sublabel: "Fast iteration, real results" },
+              { value: "0-3", label: "Weeks to MVP", sublabel: "Fast iteration, real results" },
               { value: "∞", label: "Continuous Improvement", sublabel: "Every build makes the stack better" },
             ].map((stat, idx) => (
               <ParallaxCard
@@ -334,7 +303,7 @@ export default function Home() {
               {
                 step: "01",
                 title: "Build",
-                subtitle: "Your MVP in 0-4 weeks",
+                subtitle: "Your MVP in 0-3 weeks",
                 description: "We start by designing and developing core functionality to validate your concept fast — so you can prove traction before investing big.",
               },
               {
@@ -417,11 +386,11 @@ export default function Home() {
                 </div>
                 <div>
                   <h3 className="text-xl sm:text-2xl font-bold no-break-words whitespace-nowrap">Strategy Session</h3>
-                  <p className="text-xs sm:text-sm text-foreground/60">1-hour consultation</p>
+                  <p className="text-xs sm:text-sm text-foreground/60">1-hour deep dive</p>
                 </div>
               </div>
               <p className="text-foreground/70 mb-6 leading-relaxed">
-                Not sure where to start? Let's talk through your idea, stack choices, and roadmap.
+                Complete 1-page technical blueprint
               </p>
               <div className="mb-6">
                 <div className="text-4xl sm:text-5xl font-bold ruby-text-gradient mb-1 whitespace-nowrap">$500</div>
@@ -439,13 +408,7 @@ export default function Home() {
                   <svg className="w-5 h-5 text-[#e0115f] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-foreground/70">Technical roadmap</span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <svg className="w-5 h-5 text-[#e0115f] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                  <span className="text-foreground/70">Stack recommendations</span>
+                  <span className="text-foreground/70">Stack options</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <svg className="w-5 h-5 text-[#e0115f] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -457,7 +420,7 @@ export default function Home() {
                   <svg className="w-5 h-5 text-[#e0115f] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-[#e0115f] font-medium text-sm">Credit applies if you hire us</span>
+                  <span className="text-[#e0115f] font-medium text-sm">$500 credit toward any build</span>
                 </div>
               </div>
             </ParallaxCard>
@@ -477,11 +440,11 @@ export default function Home() {
                 </div>
                 <div>
                   <h3 className="text-xl sm:text-2xl font-bold no-break-words whitespace-nowrap">MVP Build</h3>
-                  <p className="text-xs sm:text-sm text-foreground/60">We deliver an MVP in 0-4 weeks</p>
+                  <p className="text-xs sm:text-sm text-foreground/60">Delivered in 0–3 weeks</p>
                 </div>
               </div>
               <p className="text-foreground/70 mb-6 leading-relaxed">
-                Perfect for validating your idea fast. Get a full working product ready to launch.
+                Limited to 3–5 core features
               </p>
               <div className="mb-6">
                 <div className="text-4xl sm:text-5xl font-bold ruby-text-gradient mb-1 whitespace-nowrap">$1,000</div>
@@ -499,7 +462,13 @@ export default function Home() {
                   <svg className="w-5 h-5 text-[#e0115f] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-foreground/70">Functional MVP built with RubyOnVibes</span>
+                  <span className="text-foreground/70">Functional MVP using RubyOnVibes</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <svg className="w-5 h-5 text-[#e0115f] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-foreground/70">Authentication</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <svg className="w-5 h-5 text-[#e0115f] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -511,25 +480,25 @@ export default function Home() {
                   <svg className="w-5 h-5 text-[#e0115f] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-foreground/70">User authentication & onboarding</span>
+                  <span className="text-foreground/70">Core UI components</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <svg className="w-5 h-5 text-[#e0115f] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-foreground/70">Product design components</span>
+                  <span className="text-foreground/70">Deployment</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <svg className="w-5 h-5 text-[#e0115f] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-foreground/70">Communication via Slack</span>
+                  <span className="text-foreground/70">Slack</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <svg className="w-5 h-5 text-[#e0115f] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-foreground/70">Check-in meetings 2x/week</span>
+                  <span className="text-foreground/70">2 check-ins/week</span>
                 </div>
               </div>
             </ParallaxCard>
@@ -551,11 +520,11 @@ export default function Home() {
                   </div>
                   <div>
                     <h3 className="text-xl sm:text-2xl font-bold no-break-words whitespace-nowrap">Growth Build</h3>
-                    <p className="text-xs sm:text-sm text-foreground/60">Bi-weekly sprints for scaling</p>
+                    <p className="text-xs sm:text-sm text-foreground/60">Bi-weekly sprints</p>
                   </div>
                 </div>
                 <p className="text-foreground/70 mb-6 leading-relaxed">
-                  Scale your product with proven patterns. Continuous improvement through focused sprints.
+                  Continuous improvement through focused sprints.
                 </p>
                 <div className="mb-6">
                   <div className="text-4xl sm:text-5xl font-bold mb-1 ruby-text-gradient whitespace-nowrap">$2,500</div>
@@ -585,27 +554,33 @@ export default function Home() {
                     <svg className="w-5 h-5 text-[#e0115f] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-foreground/70">Product strategy & roadmap</span>
+                    <span className="text-foreground/70">Roadmap & strategy</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <svg className="w-5 h-5 text-[#e0115f] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-foreground/70">Integrations & APIs</span>
+                    <span className="text-foreground/70">Integrations</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <svg className="w-5 h-5 text-[#e0115f] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-foreground/70">Communication via Slack</span>
+                    <span className="text-foreground/70">Slack</span>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <svg className="w-5 h-5 text-[#e0115f] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    <span className="text-foreground/70">Check-in meetings 3x/week</span>
-                  </div>
+                <div className="flex items-start gap-3">
+                  <svg className="w-5 h-5 text-[#e0115f] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-foreground/70">3 check-ins/week</span>
                 </div>
+                <div className="flex items-start gap-3 pt-2 border-t border-foreground/5">
+                  <svg className="w-5 h-5 text-[#e0115f] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-[#e0115f] font-medium text-sm">Guaranteed meaningful product update every sprint</span>
+                </div>
+              </div>
               </div>
             </ParallaxCard>
           </div>

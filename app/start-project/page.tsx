@@ -154,7 +154,7 @@ export default function StartProject() {
                 >
                   <option value="">Select a project type</option>
                   <option value="strategy">Strategy Session</option>
-                  <option value="mvp">MVP Build (0-4 weeks)</option>
+                  <option value="mvp">MVP Build (0-3 weeks)</option>
                   <option value="growth">Growth Build (Ongoing)</option>
                 </select>
                 <ValidationError prefix="Project" field="project" errors={state.errors} />

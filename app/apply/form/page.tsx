@@ -149,7 +149,7 @@ export default function ApplyForm() {
       case 0:
         return (
           <div>
-            <label className={labelClass}>Ok, we'll make this quick I promise. Let's first start with your name?</label>
+            <label className={labelClass}>Let's start with your name.</label>
             <input
               type="text"
               value={formData.name}
