@@ -23,7 +23,6 @@ interface FormData {
 }
 
 export default function ApplyForm() {
-  const [isDarkMode, setIsDarkMode] = useState(true);
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -48,34 +47,10 @@ export default function ApplyForm() {
   const totalSteps = 15;
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    
-    if (savedTheme === 'light') {
-      setIsDarkMode(false);
-      document.documentElement.classList.add('light');
-      document.documentElement.classList.remove('dark');
-    } else {
-      setIsDarkMode(true);
-      document.documentElement.classList.add('dark');
-      document.documentElement.classList.remove('light');
-      if (!savedTheme) {
-        localStorage.setItem('theme', 'dark');
-      }
-    }
+    document.documentElement.classList.add('dark');
+    document.documentElement.classList.remove('light');
+    localStorage.setItem('theme', 'dark');
   }, []);
-
-  const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
-    if (!isDarkMode) {
-      document.documentElement.classList.add('dark');
-      document.documentElement.classList.remove('light');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      document.documentElement.classList.add('light');
-      localStorage.setItem('theme', 'light');
-    }
-  };
 
   const updateFormData = (field: keyof FormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -142,7 +117,7 @@ export default function ApplyForm() {
   };
 
   const renderStep = () => {
-    const inputClass = "w-full px-4 py-3 bg-background dark:bg-white/5 border border-foreground/10 dark:border-[#e0115f]/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#e0115f]/50 focus:border-transparent transition-all text-foreground";
+    const inputClass = "w-full mx-auto px-4 py-3 bg-background dark:bg-white/5 border border-foreground/10 dark:border-[#e0115f]/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#e0115f]/50 focus:border-transparent transition-all text-foreground";
     const labelClass = "block text-2xl sm:text-3xl font-bold mb-6 text-foreground text-center";
 
     switch (currentStep) {
@@ -483,28 +458,12 @@ export default function ApplyForm() {
         <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-foreground/5">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center">
             <Link href="/">
-              <img src="/dogfood-logo.png" alt="Dogfood Digital" className="h-10 sm:h-11 w-auto -ml-1" style={{ filter: isDarkMode ? 'invert(1) brightness(1.2)' : 'none' }} suppressHydrationWarning />
+              <img src="/dogfood-logo.png" alt="Dogfood Digital" className="h-10 sm:h-11 w-auto -ml-1" style={{ filter: 'invert(1) brightness(1.2)' }} suppressHydrationWarning />
             </Link>
             <div className="flex items-center gap-4">
-              <button
-                onClick={toggleTheme}
-                className="p-2 rounded-lg hover:bg-foreground/5 transition-all duration-300"
-                aria-label="Toggle theme"
-              >
-                {isDarkMode ? (
-                  <svg className="w-5 h-5 text-foreground/60 hover:text-foreground transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                  </svg>
-                ) : (
-                  <svg className="w-5 h-5 text-foreground/60 hover:text-foreground transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                  </svg>
-                )}
-              </button>
             </div>
           </div>
         </nav>
-
         <div className="flex-1 flex items-center justify-center px-4 py-32">
           <div className="text-center max-w-2xl">
             <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-[#e0115f]/20 flex items-center justify-center">
@@ -539,23 +498,8 @@ export default function ApplyForm() {
             </button>
           </Link>
           <Link href="/">
-            <img src="/dogfood-logo.png" alt="Dogfood Digital" className="h-10 sm:h-11 w-auto" style={{ filter: isDarkMode ? 'invert(1) brightness(1.2)' : 'none' }} suppressHydrationWarning />
+            <img src="/dogfood-logo.png" alt="Dogfood Digital" className="h-10 sm:h-11 w-auto mx-auto" style={{ filter: 'invert(1) brightness(1.2)' }} suppressHydrationWarning />
           </Link>
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-lg hover:bg-foreground/5 transition-all duration-300"
-            aria-label="Toggle theme"
-          >
-            {isDarkMode ? (
-              <svg className="w-5 h-5 text-foreground/60 hover:text-foreground transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-              </svg>
-            ) : (
-              <svg className="w-5 h-5 text-foreground/60 hover:text-foreground transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-              </svg>
-            )}
-          </button>
         </div>
       </nav>
 
@@ -569,55 +513,60 @@ export default function ApplyForm() {
             </p>
           </div>
 
-          {/* Form Step */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentStep}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-              className="mb-12"
-            >
-              {renderStep()}
-            </motion.div>
-          </AnimatePresence>
+          <div className="flex flex-col items-center gap-4">
+            <div className="flex justify-center items-center">
+              {/* Form Step */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentStep}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className="mb-12"
+                >
+                  {renderStep()}
+                </motion.div>
+              </AnimatePresence>
+            </div>
 
-          {/* Navigation Buttons */}
-          <div className="flex gap-4 justify-center max-w-xl mx-auto">
-            {currentStep > 0 && (
-              <button
-                onClick={prevStep}
-                className="px-8 py-4 border-2 border-foreground/10 dark:border-[#e0115f]/30 rounded-xl hover:bg-foreground/5 transition-all font-medium min-w-[120px]"
-              >
-                Back
-              </button>
-            )}
-            
-            {currentStep < totalSteps - 1 ? (
-              <button
-                onClick={nextStep}
-                disabled={!canProceed()}
-                className="flex-1 px-8 py-4 bg-[#e0115f] text-white font-medium rounded-xl hover:bg-[#b80d4a] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed ruby-glow inline-flex items-center justify-center gap-2"
-              >
-                Continue
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </button>
-            ) : (
-              <button
-                onClick={handleSubmit}
-                disabled={!canProceed() || isSubmitting}
-                className="flex-1 px-8 py-4 bg-[#e0115f] text-white font-medium rounded-xl hover:bg-[#b80d4a] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed ruby-glow"
-              >
-                {isSubmitting ? "Booking..." : "Book My Strategy Session"}
-              </button>
-            )}
+            {/* Navigation Buttons */}
+            <div className="flex gap-4 flex-col w-full max-w-xs sm:max-w-sm mx-auto">            
+              {currentStep < totalSteps - 1 ? (
+                <button
+                  onClick={nextStep}
+                  disabled={!canProceed()}
+                  className=" flex-1 px-8 py-4 bg-[#e0115f] text-white font-medium rounded-xl hover:bg-[#b80d4a] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed ruby-glow inline-flex items-center justify-center gap-2"
+                >
+                  Continue
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </button>
+              ) : (
+                <button
+                  onClick={handleSubmit}
+                  disabled={!canProceed() || isSubmitting}
+                  className="flex-1 px-8 py-4 bg-[#e0115f] text-white font-medium rounded-xl hover:bg-[#b80d4a] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed ruby-glow"
+                >
+                  {isSubmitting ? "Booking..." : "Book My Strategy Session"}
+                </button>
+              )}
+
+              {currentStep > 0 && (
+                <div className="flex">
+                  <button
+                    onClick={prevStep}
+                    className=" flex-1 px-8 py-4 border-2 border-foreground/10 dark:border-[#e0115f]/30 rounded-xl hover:bg-foreground/5 transition-all font-medium min-w-[120px]"
+                  >
+                    Back
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
 }
-

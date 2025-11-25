@@ -386,14 +386,14 @@ export default function Home() {
                 </div>
                 <div>
                   <h3 className="text-xl sm:text-2xl font-bold no-break-words whitespace-nowrap">Strategy Session</h3>
-                  <p className="text-xs sm:text-sm text-foreground/60">1-hour deep dive</p>
+                  <p className="text-xs sm:text-sm text-foreground/60">1-hour deep dive + PRD</p>
                 </div>
               </div>
               <p className="text-foreground/70 mb-6 leading-relaxed">
                 Complete 1-page technical blueprint
               </p>
               <div className="mb-6">
-                <div className="text-4xl sm:text-5xl font-bold ruby-text-gradient mb-1 whitespace-nowrap">$500</div>
+                <div className="text-4xl sm:text-5xl font-bold ruby-text-gradient mb-1 whitespace-nowrap">$200</div>
                 <div className="text-sm text-foreground/60 whitespace-nowrap">/ One-time</div>
                 <div className="text-sm text-foreground/50 mt-2">Perfect for early validation</div>
               </div>
@@ -420,7 +420,7 @@ export default function Home() {
                   <svg className="w-5 h-5 text-[#e0115f] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-[#e0115f] font-medium text-sm">$500 credit toward any build</span>
+                  <span className="text-[#e0115f] font-medium text-sm">$200 credit toward any build</span>
                 </div>
               </div>
             </ParallaxCard>
@@ -447,7 +447,7 @@ export default function Home() {
                 Limited to 3–5 core features
               </p>
               <div className="mb-6">
-                <div className="text-4xl sm:text-5xl font-bold ruby-text-gradient mb-1 whitespace-nowrap">$1,000</div>
+                <div className="text-4xl sm:text-5xl font-bold ruby-text-gradient mb-1 whitespace-nowrap">$1000</div>
                 <div className="text-sm text-foreground/60 whitespace-nowrap">/ One-time</div>
                 <div className="text-sm text-foreground/50 mt-2">Starting price for MVPs</div>
               </div>
@@ -524,10 +524,10 @@ export default function Home() {
                   </div>
                 </div>
                 <p className="text-foreground/70 mb-6 leading-relaxed">
-                  Continuous improvement through focused sprints.
+                  Continuous improvement 
                 </p>
                 <div className="mb-6">
-                  <div className="text-4xl sm:text-5xl font-bold mb-1 ruby-text-gradient whitespace-nowrap">$2,500</div>
+                  <div className="text-4xl sm:text-5xl font-bold mb-1 ruby-text-gradient whitespace-nowrap">$2500</div>
                   <div className="text-sm text-foreground/60 whitespace-nowrap">/ Every 2 weeks</div>
                   <div className="text-sm text-foreground/50 mt-2">Pause or cancel anytime</div>
                 </div>
@@ -603,7 +603,7 @@ export default function Home() {
           <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12">
             {[
               {
-                title: "Speed without compromise",
+                title: "Extreme Agility",
                 description: "We move fast because we know our tools inside and out. Your MVP ships in weeks, not months — without cutting corners on quality or design.",
               },
               {
