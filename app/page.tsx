@@ -224,7 +224,9 @@ export default function Home() {
               Start a Project
             </a>
             <a
-              href="#built-in-public"
+              href="https://x.com/NotRubyOnVibes"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 border-2 border-[#e0115f]/30 text-[#e0115f] font-medium rounded-xl hover:bg-[#e0115f]/10 hover:border-[#e0115f]/50 transition-all duration-300 hover:scale-105 text-base sm:text-lg text-center"
             >
               See How We Build in Public
