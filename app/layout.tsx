@@ -34,13 +34,23 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{
           __html: `
             (function() {
+              // Force dark mode immediately, before any rendering
               document.documentElement.classList.add('dark');
+              document.documentElement.classList.remove('light');
+              document.documentElement.style.colorScheme = 'dark';
+              // Prevent system preferences from overriding
+              if (window.matchMedia) {
+                const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+                // Force dark mode regardless of system preference
+                document.documentElement.classList.add('dark');
+                document.documentElement.classList.remove('light');
+              }
             })();
           `
         }} />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-black`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black`}
       >
         {children}
       </body>

@@ -458,7 +458,7 @@ export default function ApplyForm() {
         <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-foreground/5">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center">
             <Link href="/">
-              <img src="/dogfood-logo.png" alt="Dogfood Digital" className="h-10 sm:h-11 w-auto -ml-1" style={{ filter: 'invert(1) brightness(1.2)' }} suppressHydrationWarning />
+              <img src="/dogfood-logo.png" alt="Dogfood Digital" className="h-10 sm:h-11 w-auto -ml-1 flex-shrink-0" style={{ filter: 'invert(1) brightness(1.2)' }} suppressHydrationWarning />
             </Link>
             <div className="flex items-center gap-4">
             </div>
@@ -498,7 +498,7 @@ export default function ApplyForm() {
             </button>
           </Link>
           <Link href="/">
-            <img src="/dogfood-logo.png" alt="Dogfood Digital" className="h-10 sm:h-11 w-auto mx-auto" style={{ filter: 'invert(1) brightness(1.2)' }} suppressHydrationWarning />
+            <img src="/dogfood-logo.png" alt="Dogfood Digital" className="h-10 sm:h-11 w-auto mx-auto flex-shrink-0" style={{ filter: 'invert(1) brightness(1.2)' }} suppressHydrationWarning />
           </Link>
         </div>
       </nav>

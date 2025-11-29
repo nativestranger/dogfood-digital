@@ -8,9 +8,9 @@ export default function StartProject() {
   const [state, handleSubmit] = useForm("xqajpgny");
 
   useEffect(() => {
-    document.documentElement.classList.add('dark');
-    document.documentElement.classList.remove('light');
-    localStorage.setItem('theme', 'dark');
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+        localStorage.setItem('theme', 'dark');
   }, []);
 
   return (
@@ -19,7 +19,7 @@ export default function StartProject() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-foreground/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center">
           <Link href="/">
-            <img src="/dogfood-logo.png" alt="Dogfood Digital" className="h-10 sm:h-11 w-auto -ml-1" style={{ filter: 'invert(1) brightness(1.2)' }} suppressHydrationWarning />
+            <img src="/dogfood-logo.png" alt="Dogfood Digital" className="h-10 sm:h-11 w-auto -ml-1 flex-shrink-0" style={{ filter: 'invert(1) brightness(1.2)' }} suppressHydrationWarning />
           </Link>
           <div className="flex items-center gap-4">
             <Link href="/apply" className="px-4 py-2 bg-[#e0115f] text-white rounded-lg hover:bg-[#b80d4a] transition-all duration-300 text-sm font-medium ruby-glow">

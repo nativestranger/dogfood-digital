@@ -1,15 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #0a0a0a;
-  --ruby: #e0115f;
-  --ruby-dark: #b80d4a;
-  --ruby-light: #ff1a6b;
-  --ruby-glow: rgba(224, 17, 95, 0.3);
-  --muted: #6b7280;
+  /* Dark theme only - no light mode */
+  --background: #000000;
+  --foreground: #fafafa;
+  --ruby: #ff1a6b;
+  --ruby-dark: #e0115f;
+  --ruby-light: #ff4d8a;
+  --ruby-glow: rgba(255, 26, 107, 0.5);
+  --muted: #9ca3af;
   --ruby-gradient: linear-gradient(135deg, #e0115f 0%, #ff1a6b 50%, #b80d4a 100%);
   --ruby-gradient-subtle: linear-gradient(135deg, rgba(224, 17, 95, 0.1) 0%, rgba(255, 26, 107, 0.1) 50%, rgba(184, 13, 74, 0.1) 100%);
+  color-scheme: dark !important;
 }
 
 @theme inline {
@@ -23,56 +25,36 @@
   --font-mono: var(--font-geist-mono);
 }
 
-.dark {
-  --background: #000000;
-  --foreground: #fafafa;
-  --ruby: #ff1a6b;
-  --ruby-dark: #e0115f;
-  --ruby-light: #ff4d8a;
-  --ruby-glow: rgba(255, 26, 107, 0.5);
-  --muted: #9ca3af;
-}
-
-.light {
-  --background: #ffffff !important;
-  --foreground: #0a0a0a !important;
-  --ruby: #e0115f !important;
-  --ruby-dark: #b80d4a !important;
-  --ruby-light: #ff1a6b !important;
-  --ruby-glow: rgba(224, 17, 95, 0.3) !important;
-  --muted: #6b7280 !important;
-}
-
 body {
-  background: var(--background);
+  background: #000000 !important;
   color: var(--foreground);
   font-family: var(--font-geist-sans), system-ui, sans-serif;
   overflow-x: hidden;
 }
 
-.dark,
-.dark body,
-.dark #__next,
-.dark main {
+html {
+  background-color: #000000 !important;
+  color-scheme: dark !important;
+}
+
+html * {
+  color-scheme: dark !important;
+  border-color: rgba(224, 17, 95, 0.2);
+}
+
+body,
+#__next,
+main {
   background: #000000 !important;
 }
 
-.dark section {
+section {
   background-color: #000000 !important;
 }
 
-.dark div[class*="bg-gradient"],
-.dark div[class*="via-"] {
+div[class*="bg-gradient"],
+div[class*="via-"] {
   background: #000000;
-}
-
-/* Force all backgrounds to be black in dark mode */
-html.dark {
-  background-color: #000000;
-}
-
-html.dark * {
-  border-color: rgba(224, 17, 95, 0.2);
 }
 
 * {
@@ -175,13 +157,7 @@ p, span {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not(.light) .hover-lift:hover {
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-  }
-}
-
-.dark .hover-lift:hover {
+.hover-lift:hover {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
@@ -198,12 +174,8 @@ p, span {
 .geometric-splash {
   position: absolute;
   pointer-events: none;
-  opacity: 0.1;
-  will-change: transform;
-}
-
-.dark .geometric-splash {
   opacity: 0.2;
+  will-change: transform;
 }
 
 .geometric-splash-1 {

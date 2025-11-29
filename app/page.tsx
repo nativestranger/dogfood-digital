@@ -177,9 +177,9 @@ export default function Home() {
             >
               Book a Call
             </Link>
-            <a href="#contact" className="px-5 py-2.5 border-2 border-[#e0115f]/30 text-[#e0115f] rounded-lg hover:bg-[#e0115f]/10 transition-all duration-300 font-medium">Start a Project</a>
+            <a href="#contact" className="px-5 py-2.5 border-2 border-white text-[#e0115f] rounded-lg hover:bg-white/5 hover:border-white transition-all duration-300 font-medium shadow-lg shadow-white/15">Start a Project</a>
           </div>
-          <div className="md:hidden flex items-center gap-3 ml-auto">
+          <div className="md:hidden flex items-center gap-3 ">
             <Link
               href="/apply"
               className="px-4 py-2 bg-[#e0115f] text-white rounded-lg text-sm font-medium"
@@ -191,7 +191,7 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="min-h-screen flex flex-col items-center justify-center px-6 sm:px-8 py-32 pt-32 relative overflow-hidden dark:bg-black">
+      <section className="min-h-screen flex flex-col items-center justify-center px-6 sm:px-8 py-32 pt-32 relative overflow-hidden bg-black">
         <div ref={(el) => { parallaxRefs.current[0] = el; }} className="geometric-splash geometric-splash-1 parallax-slow"></div>
         <div ref={(el) => { parallaxRefs.current[1] = el; }} className="geometric-splash geometric-splash-2 parallax-fast"></div>
         {/* Red spot glows - light mode */}
@@ -219,7 +219,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4 px-4">
             <a
               href="#contact"
-              className="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 bg-[#e0115f] text-white font-medium rounded-xl hover:bg-[#b80d4a] transition-all duration-300 hover:scale-105 hover:shadow-2xl text-base sm:text-lg ruby-glow text-center"
+              className="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 bg-[#e0115f] text-white font-medium rounded-xl border-2 border-white hover:bg-[#b80d4a] transition-all duration-300 hover:scale-105 hover:shadow-2xl text-base sm:text-lg ruby-glow text-center shadow-lg shadow-white/15"
             >
               Start a Project
             </a>
@@ -227,7 +227,7 @@ export default function Home() {
               href="https://x.com/NotRubyOnVibes"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 border-2 border-[#e0115f]/30 text-[#e0115f] font-medium rounded-xl hover:bg-[#e0115f]/10 hover:border-[#e0115f]/50 transition-all duration-300 hover:scale-105 text-base sm:text-lg text-center"
+              className="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 border-2 border-white text-[#e0115f] font-medium rounded-xl hover:bg-white/5 hover:border-white transition-all duration-300 hover:scale-105 text-base sm:text-lg text-center shadow-lg shadow-white/15"
             >
               See How We Build in Public
             </a>
@@ -236,7 +236,7 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 border-y border-foreground/5 relative overflow-hidden dark:bg-black dark:border-[#e0115f]/20">
+      <section className="py-16 sm:py-24 px-4 sm:px-6 border-y border-foreground/5 relative overflow-hidden bg-black border-[#e0115f]/20">
         <div ref={(el) => { parallaxRefs.current[2] = el; }} className="geometric-splash geometric-splash-3 parallax-slow"></div>
         {/* Red spot glows - light mode */}
         <div className="hidden md:block dark:hidden absolute top-1/2 left-1/3 w-[400px] h-[400px] bg-[#e0115f]/12 rounded-full blur-[90px] pointer-events-none"></div>
@@ -266,7 +266,7 @@ export default function Home() {
       </section>
 
       {/* What Is Dogfood Digital */}
-      <section className="py-20 sm:py-32 px-6 sm:px-8 dark:bg-black relative overflow-hidden">
+      <section className="py-20 sm:py-32 px-6 sm:px-8 bg-black relative overflow-hidden">
         {/* Red spot glows - light mode */}
         <div className="hidden md:block dark:hidden absolute top-1/3 right-1/4 w-[350px] h-[350px] bg-[#e0115f]/14 rounded-full blur-[95px] pointer-events-none"></div>
         {/* Red spot glows - dark mode */}
@@ -284,15 +284,11 @@ export default function Home() {
       </section>
 
       {/* How We Work */}
-      <section id="how-we-work" className="py-20 sm:py-32 px-6 sm:px-8 relative overflow-hidden bg-white dark:bg-black">
-        <div className="animated-gradient absolute inset-0 opacity-[0.03] dark:opacity-[0.2]"></div>
-        <div ref={(el) => { parallaxRefs.current[3] = el; }} className="geometric-splash geometric-splash-1 parallax-slow opacity-0 dark:opacity-[0.3]" style={{ top: "10%", right: "-10%" }}></div>
-        {/* Red spot glows - light mode */}
-        <div className="hidden md:block dark:hidden absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-[#e0115f]/15 rounded-full blur-[120px] pointer-events-none"></div>
-        <div className="hidden md:block dark:hidden absolute bottom-1/3 left-1/3 w-[450px] h-[450px] bg-[#e0115f]/12 rounded-full blur-[110px] pointer-events-none"></div>
-        {/* Red spot glows - dark mode */}
-        <div className="hidden md:dark:block absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-[#e0115f]/30 rounded-full blur-[120px] pointer-events-none"></div>
-        <div className="hidden md:dark:block absolute bottom-1/3 left-1/3 w-[450px] h-[450px] bg-[#e0115f]/25 rounded-full blur-[110px] pointer-events-none"></div>
+      <section id="how-we-work" className="py-20 sm:py-32 px-6 sm:px-8 relative overflow-hidden bg-black">
+        <div ref={(el) => { parallaxRefs.current[3] = el; }} className="geometric-splash geometric-splash-1 parallax-slow opacity-[0.1]" style={{ top: "10%", right: "-10%" }}></div>
+        {/* Subtle red spot glows */}
+        <div className="hidden md:block absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-[#e0115f]/10 rounded-full blur-[120px] pointer-events-none"></div>
+        <div className="hidden md:block absolute bottom-1/3 left-1/3 w-[450px] h-[450px] bg-[#e0115f]/8 rounded-full blur-[110px] pointer-events-none"></div>
         <div className="max-w-7xl mx-auto relative z-10">
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-center tracking-tight fade-on-scroll opacity-0">
             How We Work
@@ -358,7 +354,7 @@ export default function Home() {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-20 sm:py-32 px-6 sm:px-8 bg-background dark:bg-black relative overflow-hidden">
+      <section id="pricing" className="py-20 sm:py-32 px-6 sm:px-8 bg-black relative overflow-hidden">
         {/* Red spot glows - light mode */}
         <div className="hidden md:block dark:hidden absolute top-1/3 left-1/4 w-[450px] h-[450px] bg-[#e0115f]/18 rounded-full blur-[110px] pointer-events-none"></div>
         <div className="hidden md:block dark:hidden absolute bottom-1/4 right-1/3 w-[400px] h-[400px] bg-[#e0115f]/15 rounded-full blur-[100px] pointer-events-none"></div>
@@ -638,16 +634,12 @@ export default function Home() {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-20 sm:py-32 px-6 sm:px-8 bg-background dark:bg-black relative overflow-hidden">
-        <div className="animated-gradient absolute inset-0 opacity-[0.02] dark:opacity-[0.12]"></div>
-        <div ref={(el) => { parallaxRefs.current[4] = el; }} className="geometric-splash geometric-splash-2 parallax-fast" style={{ top: '10%', right: '-5%', opacity: '0.08' }}></div>
-        <div ref={(el) => { parallaxRefs.current[5] = el; }} className="geometric-splash geometric-splash-3 parallax-slow" style={{ bottom: '20%', left: '-5%', opacity: '0.06' }}></div>
-        {/* Red spot glows - light mode */}
-        <div className="hidden md:block dark:hidden absolute top-1/3 right-1/3 w-[500px] h-[500px] bg-[#e0115f]/14 rounded-full blur-[120px] pointer-events-none"></div>
-        <div className="hidden md:block dark:hidden absolute bottom-1/4 left-1/4 w-[450px] h-[450px] bg-[#e0115f]/10 rounded-full blur-[110px] pointer-events-none"></div>
-        {/* Red spot glows - dark mode */}
-        <div className="hidden md:dark:block absolute top-1/3 right-1/3 w-[500px] h-[500px] bg-[#e0115f]/22 rounded-full blur-[120px] pointer-events-none"></div>
-        <div className="hidden md:dark:block absolute bottom-1/4 left-1/4 w-[450px] h-[450px] bg-[#e0115f]/18 rounded-full blur-[110px] pointer-events-none"></div>
+      <section id="faq" className="py-20 sm:py-32 px-6 sm:px-8 bg-black relative overflow-hidden">
+        <div ref={(el) => { parallaxRefs.current[4] = el; }} className="geometric-splash geometric-splash-2 parallax-fast" style={{ top: '10%', right: '-5%', opacity: '0.05' }}></div>
+        <div ref={(el) => { parallaxRefs.current[5] = el; }} className="geometric-splash geometric-splash-3 parallax-slow" style={{ bottom: '20%', left: '-5%', opacity: '0.04' }}></div>
+        {/* Subtle red spot glows */}
+        <div className="hidden md:block absolute top-1/3 right-1/3 w-[500px] h-[500px] bg-[#e0115f]/10 rounded-full blur-[120px] pointer-events-none"></div>
+        <div className="hidden md:block absolute bottom-1/4 left-1/4 w-[450px] h-[450px] bg-[#e0115f]/8 rounded-full blur-[110px] pointer-events-none"></div>
         <div className="max-w-4xl mx-auto relative z-10">
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-12 sm:mb-20 text-center tracking-tight fade-on-scroll opacity-0">
             FAQs
@@ -697,17 +689,9 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section id="contact" className="py-20 sm:py-32 px-6 sm:px-8 relative overflow-hidden bg-white dark:bg-black">
-        <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.2]">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `radial-gradient(circle at 2px 2px, #e0115f 1px, transparent 0)`,
-            backgroundSize: '40px 40px'
-          }}></div>
-        </div>
-        {/* Red spot glows - light mode */}
-        <div className="hidden md:block dark:hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#e0115f]/25 rounded-full blur-[140px] pointer-events-none"></div>
-        {/* Red spot glows - dark mode */}
-        <div className="hidden md:dark:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#e0115f]/40 rounded-full blur-[140px] pointer-events-none"></div>
+      <section id="contact" className="py-20 sm:py-32 px-6 sm:px-8 relative overflow-hidden bg-black">
+        {/* Subtle red spot glow */}
+        <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#e0115f]/10 rounded-full blur-[140px] pointer-events-none"></div>
         <div className="max-w-4xl mx-auto text-center fade-on-scroll opacity-0 relative z-10">
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 sm:mb-8 tracking-tight px-4">
             <span className="ruby-text-gradient">Start your project</span>
