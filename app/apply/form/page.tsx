@@ -477,7 +477,7 @@ export default function ApplyForm() {
             </p>
             <Link
               href="/"
-              className="inline-block px-8 py-4 bg-[#e0115f] text-white font-medium rounded-lg hover:bg-[#b80d4a] transition-all duration-300"
+              className="px-4 py-2 border-2 border-white text-[#e0115f] rounded-lg hover:bg-white/5 hover:border-white transition-all duration-300 text-md font-medium shadow-lg shadow-white/15"
             >
               Back to Home
             </Link>

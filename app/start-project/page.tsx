@@ -22,10 +22,10 @@ export default function StartProject() {
             <img src="/dogfood-logo.png" alt="Dogfood Digital" className="h-10 sm:h-11 w-auto -ml-1 flex-shrink-0" style={{ filter: 'invert(1) brightness(1.2)' }} suppressHydrationWarning />
           </Link>
           <div className="flex items-center gap-4">
-            <Link href="/apply" className="px-4 py-2 bg-[#e0115f] text-white rounded-lg hover:bg-[#b80d4a] transition-all duration-300 text-sm font-medium ruby-glow">
+            <Link href="/apply" className="px-4 py-2 bg-[#e0115f] text-white rounded-lg hover:bg-[#b80d4a] transition-all duration-300 text-md font-medium ruby-glow">
               Book a Call
             </Link>
-            <Link href="/" className="text-sm text-foreground/60 hover:text-foreground transition-colors">
+            <Link href="/" className="px-4 py-2 border-2 border-white text-[#e0115f] rounded-lg hover:bg-white/5 hover:border-white transition-all duration-300 text-md font-medium shadow-lg shadow-white/15">
               Back to Home
             </Link>
           </div>
