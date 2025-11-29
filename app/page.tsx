@@ -160,13 +160,10 @@ export default function Home() {
     <div className="scroll-smooth dark:bg-black relative">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-foreground/5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center">
-          <img 
-            src="/dogfood-logo.png" 
-            alt="Dogfood Digital" 
-            className="h-10 sm:h-11 w-auto -ml-1 flex-shrink-0" 
-            style={{ filter: mounted && isDarkMode ? 'invert(1) brightness(1.2)' : 'none' }} 
-          />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex justify-between md:items-center">
+          <Link href="/">
+            <img src="/dogfood-logo.png" alt="Dogfood Digital" className="h-10 sm:h-11 w-auto -ml-1 flex-shrink-0" style={{ filter: 'invert(1) brightness(1.2)' }} suppressHydrationWarning />
+          </Link>
           <div className="hidden md:flex items-center gap-6 text-sm ml-auto">
             <a href="#how-we-work" className="text-foreground/60 hover:text-foreground transition-colors">How We Work</a>
             <a href="#pricing" className="text-foreground/60 hover:text-foreground transition-colors">Pricing</a>
@@ -179,7 +176,7 @@ export default function Home() {
             </Link>
             <a href="#contact" className="px-5 py-2.5 border-2 border-white text-[#e0115f] rounded-lg hover:bg-white/5 hover:border-white transition-all duration-300 font-medium shadow-lg shadow-white/15">Start a Project</a>
           </div>
-          <div className="md:hidden flex items-center gap-3 ">
+          <div className="md:hidden flex items-center gap-3">
             <Link
               href="/apply"
               className="px-4 py-2 bg-[#e0115f] text-white rounded-lg text-sm font-medium"
@@ -229,7 +226,7 @@ export default function Home() {
               rel="noopener noreferrer"
               className="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 border-2 border-white text-[#e0115f] font-medium rounded-xl hover:bg-white/5 hover:border-white transition-all duration-300 hover:scale-105 text-base sm:text-lg text-center shadow-lg shadow-white/15"
             >
-              See How We Build in Public
+              Follow the Intern
             </a>
           </div>
         </div>
